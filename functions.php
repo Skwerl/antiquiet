@@ -22,7 +22,6 @@ function custom_css_styles() {
 	wp_enqueue_style('jquery-tipsy', get_bloginfo('stylesheet_directory').'/js/jquery.tipsy.css');
 	if (is_single()) {
 		wp_enqueue_style('aristo', get_bloginfo('stylesheet_directory').'/js/Aristo/Aristo.css');	
-		wp_enqueue_style('twitter', 'http://platform.twitter.com/embed/embed.css');	
 	}
 }
 add_action('wp_enqueue_scripts', 'custom_css_styles');
@@ -476,56 +475,6 @@ function link_artist_names($content) {
 	return $content;
 }
 #add_filter('the_content', 'link_artist_names',20);
-
-// auto twitter embeds
-
-define('AQ_TWEET_REGEX', '/^(http|https):\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)$/');
-function get_tweet_details($id) {
-	if (!class_exists('WP_Http')) { include_once(ABSPATH.WPINC.'/class-http.php'); }
-	$request_url = "http://api.twitter.com/1/statuses/show.json?id={$id}";
-	$request = new WP_Http;
-	$result = $request->request($request_url);
-	if (gettype($result) == "object" && get_class($result) == "WP_Error") {
-		return NULL;
-	}
-	return json_decode($result["body"]);
-}
-function automatic_tweet_handler($matches, $attr, $url, $rawattr) {
-	if (preg_match(AQ_TWEET_REGEX, $url, $matches)) {
-		$id = $matches[4];
-		if (false === ($data = get_transient('tweet-data-'.$id))) {
-			$data = get_tweet_details($id);
-			set_transient('tweet-data-'.$id, $data);
-		}
-		$return = '<div lang="en" style="max-width: none !important; display: block;" class="twitter-tweet-rendered" id="twitter-widget-'.$id.'">
-			<div class="twt-border" style="max-width: none !important;">
-				<blockquote class="twt-o twt-tweet hentry twt-always-show-actions  twt-pinned twt-narrow" data-twt-product="tweetembed" data-twt-intents="false" data-twt-id="'.$id.'">
-					<div class="vcard author">
-						<a data-screen-name="'.$data->user->screen_name.'" href="http://twitter.com/'.$data->user->screen_name.'" class="screen-name url"><span class="avatar"><img alt="" class="photo" src="'.$data->user->profile_image_url.'"></span><span class="fn">'.$data->user->name.'</span><span class="nickname">@<b>'.$data->user->screen_name.'</b></span></a>
-						<iframe scrolling="no" frameborder="0" src="//platform.twitter.com/widgets/follow_button.html?align=right&amp;button=grey&amp;screen_name='.$data->user->screen_name.'&amp;show_count=false&amp;show_screen_name=false&amp;lang=en" allowtransparency="true" class="twt-follow-button"></iframe>
-					</div>
-					<div class="entry-content">
-						<p class="entry-title" style="font-size: 22px !important; line-height: 28px !important;">'.$data->text.'</p>
-					</div>
-					<div class="footer">
-						<a href="http://twitter.com/'.$data->user->screen_name.'/statuses/'.$id.'" class="view-details"><span title="'.date('c',strtotime($data->created_at)).'" class="updated">
-						<span title="'.date('c',strtotime($data->created_at)).'" class="value-title"></span>'.date('l, F jS Y @ g:i A',strtotime($data->created_at)).'</span></a>
-						<ul class="twt-actions">
-							<li><a title="Reply" class="reply-action twt-intent" href="https://twitter.com/intent/tweet?in_reply_to='.$id.'"><i></i><b>Reply</b></a></li>
-							<li><a title="Retweet" class=" retweet-action  twt-intent" href="https://twitter.com/intent/retweet?tweet_id='.$id.'"><i></i><b>Retweet</b></a></li>
-							<li><a title="Favorite" class=" favorite-action  twt-intent" href="https://twitter.com/intent/favorite?tweet_id='.$id.'"><i></i><b>Favorite</b></a></li>
-						</ul>
-					</div>
-				</blockquote>
-			</div>
-		</div>
-		';
-		return $return;
-	} else {
-		return '<a href="'.$matches[0].'">'.$matches[0].'</a>';
-	}
-}
-wp_embed_register_handler('aq_auto_tweets', AQ_TWEET_REGEX, 'automatic_tweet_handler');
 
 // miscellaneous overrides...
 

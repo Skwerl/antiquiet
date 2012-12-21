@@ -20,5 +20,18 @@ qacct:"p-917LY1WsWzp_g"
 
 </div>
 
+<style type="text/css">
+
+.twitter-tweet-rendered {
+	width: 626px !important;
+	max-width: 626px !important;
+}
+.twt-border {
+	width: 626px !important;
+	max-width: 626px !important;
+}
+
+</style>
+
 </body>
 </html>
