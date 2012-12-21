@@ -1,0 +1,30 @@
+/* yeah, skwerl is this anal retentive. */
+
+#set-post-thumbnail img {
+	width: 257px;
+	height: auto;
+}
+
+.checkbox, .side-info, .plugins tr,
+#your-profile #rich_editing {
+	background: none;
+}
+
+th#coauthors {
+	width: 165px;
+}
+
+#coauthors-list .coauthor-tag {
+	border: none;
+	padding: 10px 0px 5px;
+	width: 200px;
+}
+
+#coauthors-list .coauthor-gravatar {
+	float: left;
+	margin-right: 8px;
+}
+
+#coauthors-list .coauthor-suggest {
+	margin: 15px 0px 10px;
+}
