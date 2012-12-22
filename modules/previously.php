@@ -1,6 +1,6 @@
 <?php
 
-if (in_category($permanent_categories)) {
+if (in_category($permanent_categories) && !in_category('secret')) {
 	$previously = array();
 	$category = get_the_category(); 
 	$category_posts = get_posts(array('numberposts'=>-1, 'category'=>$category[0]->cat_ID));

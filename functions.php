@@ -478,6 +478,13 @@ function link_artist_names($content) {
 
 // miscellaneous overrides...
 
+function hide_from_lists($query) {
+	if (!is_single() && !is_admin()) {
+		$query->set('cat','-2582');
+	}
+}
+add_action('pre_get_posts', 'hide_from_lists');
+
 function remove_menus() {
 	global $menu;
 	$restricted = array(__('Links'));
