@@ -8,6 +8,10 @@
 
 	<style type="text/css">
 
+	#zerg {
+		clear: both;
+	}
+
 	#zerg h2 {
 		font-size: 18px;
 		margin-bottom: 9px;
@@ -15,6 +19,11 @@
 	
 	#zerg .zergentity {
 		margin: 0px 9px 0px 0px !important;
+	}
+
+	#zerg .zergentity img {
+		width: 116px !important;
+		border: 1px solid #000 !important;
 	}
 	
 	</style>
