@@ -16,6 +16,14 @@
 
 					<div class="divider">&nbsp;</div>
 
+					<div class="bigbanner"><a href="/exclusive/sessions/2013/01/walking-papers/">
+						<img src="http://cdn.antiquiet.com/wp-content/uploads/2013/01/wp-big-banner.jpg" />
+					</a></div>
+
+					<div class="bigbanner"><a href="/exclusive/sessions/2012/11/open-hand-antiquiet-session/">
+						<img src="http://cdn.antiquiet.com/wp-content/uploads/2012/11/openhand-big-banner.jpg" />
+					</a></div>
+
 					<div class="bigbanner"><a href="/exclusive/sessions/2012/10/jeff-the-brotherhood-antiquiet-sessions/">
 						<img src="http://cdn.antiquiet.com/wp-content/uploads/2012/10/jtb-big-banner.jpg" />
 					</a></div>
