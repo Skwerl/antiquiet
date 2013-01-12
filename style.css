@@ -1309,6 +1309,7 @@ ol.commentlist li.comment {
 }
 #right_sidebar #available_now .text {
 	height: 86px;
+	width: 214px;
 	display: table-cell;
 	vertical-align: middle;
 }
