@@ -35,6 +35,7 @@ function is_mcdonalds_festivalfever() {
 		'Kid Koala',
 		'Lou Reed',
 		'Macklemore',
+		'Meat Puppets',
 		'Nas',
 		'Nick Cave And The Bad Seeds',
 		'Paul McCartney',
