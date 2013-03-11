@@ -68,8 +68,10 @@
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_ratedr");
 	GA_googleAddSlot("ca-pub-2746694815475031", "160x600_ratedr"); 
 	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_home"); 
-	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_ros"); 
+	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_ros");
 </script>
+
+<?php include(TEMPLATEPATH.'/ads/tag_festivalfever.php'); ?>
 
 <?php if (is_category('sessions')) { ?>
 	<script type="text/javascript">
