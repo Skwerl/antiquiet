@@ -50,6 +50,7 @@ function is_mcdonalds_festivalfever() {
 		'Red Hot Chili Peppers',
 		'Reignwolf',
 		'Sigur R—s',
+		'Sound City Players',
 		'Stone Roses',
 		'Surfer Blood',
 		'Tegan And Sara',
