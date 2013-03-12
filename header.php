@@ -97,6 +97,8 @@
 
 <body <?php body_class($class); ?>>
 
+<div id="townsquare_pushdown" class="shadow"></div>
+
 <div id="everything_wrapper" class="shadow">
 
 	<div id="header_wrapper">

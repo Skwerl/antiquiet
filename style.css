@@ -275,6 +275,14 @@ div.clearing {
 	margin-top: 8px;
 }
 
+#townsquare_pushdown {
+	width: 984px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -1px;
+	min-height: 1px;
+}
+
 /*////////////////// FEATURE PANEL ///////////////////////////////////////////////////////////////*/
 
 #feature_panel {
