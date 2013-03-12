@@ -20,6 +20,7 @@ function is_mcdonalds_festivalfever() {
 		'Cat Power',
 		'Cold War Kids',
 		'Death Grips',
+		'Depeche Mode',
 		'Dessa',
 		'Dirty Ghosts',
 		'Edward Sharpe & The Magnetic Zeros',
