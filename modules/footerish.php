@@ -14,6 +14,4 @@
 		<a href="https://sites.google.com/a/mogmusicnetwork.com/www/mmn-publisher-private-policy">MOG Privacy Policy</a>
 	</p>
 
-	<?php include(TEMPLATEPATH.'/ads/gam_1x1.php'); ?>
-
 </div>

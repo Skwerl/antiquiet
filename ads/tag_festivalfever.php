@@ -61,6 +61,7 @@ function is_mcdonalds_festivalfever() {
 		'The XX',
 		'Tom Petty',
 		'Unknown Mortal Orchestra',
+		'Vampire Weekend',
 		'Wavves',
 		'Weird Al Yankovic',
 		'Yeah Yeah Yeahs'

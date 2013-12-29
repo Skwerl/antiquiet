@@ -16,6 +16,14 @@
 
 					<div class="divider">&nbsp;</div>
 
+					<div class="bigbanner"><a href="/exclusive/sessions/2013/08/pos-antiquiet-session/">
+						<img src="http://cdn.antiquiet.com/wp-content/uploads/2013/07/pos-big-banner.jpg" />
+					</a></div>
+
+					<div class="bigbanner"><a href="/exclusive/sessions/2013/05/antiquiet-sessions-various-cruelties/">
+						<img src="http://cdn.antiquiet.com/wp-content/uploads/2013/05/vc-big-banner.jpg" />
+					</a></div>
+
 					<div class="bigbanner"><a href="/exclusive/sessions/2013/01/walking-papers/">
 						<img src="http://cdn.antiquiet.com/wp-content/uploads/2013/01/wp-big-banner.jpg" />
 					</a></div>

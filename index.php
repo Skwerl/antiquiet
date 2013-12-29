@@ -7,10 +7,10 @@
 		$panel_index = 0;
 		$feature_thumbs = array();
 		$feature_panels = array();
-		query_posts('meta_key=featurepanel_show&meta_value=1&posts_per_page=10');
 
 		remove_filter('get_the_excerpt', 'strip_excerpts');
 
+		query_posts('meta_key=featurepanel_show&meta_value=1&posts_per_page=10');
 		while (have_posts()) {
 			the_post();
 			$panel_index++;			
