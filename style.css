@@ -120,60 +120,6 @@ div.clearing {
 
 /*////////////////// BUTTONS & KNOBS /////////////////////////////////////////////////////////////*/
 
-.cat_bubble {
-	width: 32px;
-	height: 32px;
-	float: left;
-	background-image: url("images/buttons-sprite.png");
-	background-position: left top;
-	background-repeat: no-repeat;	
-	cursor: pointer;
-}
-
-.cat_bubble.postflag_audio { background-position: 0px top; }
-.cat_bubble.postflag_video { background-position: -32px top; }
-.cat_bubble.postflag_photos { background-position: -64px top; }
-.cat_bubble.postflag_live { background-position: -96px top; }
-.cat_bubble.postflag_tv { background-position: -128px top; }
-.cat_bubble.postflag_album { background-position: -160px top; }
-.cat_bubble.postflag_download { background-position: -192px top; }
-.cat_bubble.postflag_nsfw { background-position: -224px top; }
-.cat_bubble.rss { background-position: -256px top; }
-.cat_bubble.reset { background-position: -288px top; }
-
-.cat_toggle {
-	color: #FFF;
-	font-weight: bold;
-	text-transform: uppercase;
-	float: left;
-	padding: 3px 8px 2px 14px;
-	margin-right: 3px;
-	margin-bottom: 3px;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	background-color: #4A0602;
-	background-image: url("images/check-sprite.png");
-	background-repeat: no-repeat;
-	background-position: 4px 0px;
-	cursor: pointer;
-}
-
-.cat_toggle.genre { background-color: #6A0701; }
-.cat_toggle.query { background-color: #8B0903; }
-
-.cat_toggle.disabled {
-	background-position: 4px -17px;
-}
-.cat_toggle.disabled span {
-	filter:alpha(opacity=40);
-	-moz-opacity:0.4;
-	-khtml-opacity: 0.4;
-	opacity: 0.4;
-}
-
-.cat_toggle.stuck.add { background-position: 4px 0px; }
-.cat_toggle.stuck.kill { background-position: 4px -17px; }
-
 .stars {
 	width: 150px;
 }
@@ -252,9 +198,12 @@ div.clearing {
 }
 
 #hero_wrapper {
-	height: 358px;
+	height: 60px;
 	margin-left: -8px;
 	margin-bottom: 10px;
+}
+body.home #hero_wrapper {
+	height: 358px;
 }
 #hero_wrapper #feature_panel {
 	position: relative;
@@ -350,25 +299,15 @@ div.clearing {
 
 /*////////////////// MAIN COLUMN (ARTICLE LIST) //////////////////////////////////////////////////*/
 
-#hidden_counter {
-	display: none;
-	padding: 10px;
-	margin-bottom: 10px;
-	background-color: #F6D968;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
+#article_list div.header {
+	margin-top: 18px;
+	color: #AA0A02;
+	font-size: 20px;
+	text-align: center;
 }
-#hidden_counter {
-	font-size: 13px;
-}
-#hidden_counter .recent a {
-	font-size: 12px;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-#hidden_counter a.why {
-	display: none;
-	color: #AA0A02;	
+
+#article_list #article_loader {
+	margin-top: 15px;	
 }
 
 #content_wrapper {

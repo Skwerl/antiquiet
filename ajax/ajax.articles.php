@@ -2,6 +2,11 @@
 
 require_once('ajax.enabler.php');
 
+$cat = $_POST['cat'];
+if (empty($cat)) {
+	$cat = get_query_var('cat') ? get_query_var('cat') : false;
+}
+
 if ($limit) { $ppp = $limit; }
 else { $ppp = intval(get_query_var('posts_per_page')); }
 
@@ -9,6 +14,7 @@ $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 $offset = ($paged-1)*$ppp;
 
 $args = array();
+$args['cat'] = $cat;
 $args['numberposts'] = 20;
 $args['offset'] = $offset;
 $get_dem_posts = get_posts($args);
@@ -23,7 +29,6 @@ foreach ($get_dem_posts as $post) {
 			<span class="title arvo"><?php the_title(); ?></span>
 			<span class="subhead"><span class="category"><?php aq_the_categories($post->ID); ?>:</span> <?php echo aq_clean_periods(get_the_excerpt()); ?></span>
 		</a></div>
-		<div class="divider">&nbsp;</div>
 	</div><?php
 }
 

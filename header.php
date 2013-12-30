@@ -92,6 +92,7 @@
 
 <script type="text/javascript">
 	var aq_ajax_path = "<?php echo get_stylesheet_directory_uri().'/ajax/'; ?>";
+	var aq_ajax_cat = "<?php echo get_query_var('cat'); ?>";
 </script>
 
 <?php wp_head(); ?>
