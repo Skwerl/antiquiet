@@ -1,5 +1,7 @@
 <div id="twitter_stream" class="sidebar_module">
 	<div class="header arvo">What Twats Are Saying</div>
+	<!--
+
 	<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
 	<script type="text/javascript">
 		new TWTR.Widget({
@@ -30,4 +32,7 @@
 			}
 		}).render().start();
 	</script>
+	
+	//-->
+	
 </div>
