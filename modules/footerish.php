@@ -1,8 +1,10 @@
 <div id="footerish_thing" class="sidebar_module">
 
+	<!--
 	<div style="margin-bottom: 13px;">
 		<a href="/subscribe/"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/newsletter-promo.jpg" /></a>
 	</div>
+	//-->
 
 	<div class="header arvo">Contact</div>
 

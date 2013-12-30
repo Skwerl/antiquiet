@@ -1,6 +1,8 @@
+<!--
 <div class="ad_160x600">
 	<?php include(TEMPLATEPATH.'/ads/gam_160x600.php'); ?>
 </div>
+//-->
 
 <div id="comments">
 
