@@ -7,24 +7,17 @@
 			<div class="article_body">
 				<?php while (have_posts()) { the_post(); ?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-						<?php
 
-						$post_flags = aq_get_flags($post->ID);
-						if (!empty($post_flags)) {
-							echo '<div class="postflags">';
-							foreach ($post_flags as $flag) { echo '<div class="cat_bubble article '.$flag.'"></div>'; }					
-							echo '</div>';
-						}
+						<h3><span class="date">By <?php the_author_posts_link(); ?> at <?php the_time('g:i A l, F jS Y'); ?></span></h3>
 
-						?>
-						<h4><span class="date"><?php the_date('l, F jS Y'); ?></span></h4>
 						<div class="divider">&nbsp;</div>
-						<h2 class="arvo">
-							<span class="categories"><?php the_category(', '); ?>:</span>&nbsp;
-							<span class="subject"><?php aq_the_subjects($post->ID); ?></span>
-						</h2>						
+
 						<h1 class="arvo"><span class="headline"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span></h1>
-						<h3><span class="authors">By <?php aq_the_authors(); ?></span></h3>
+
+						<h2 class="arvo">
+							<span class="subjects"><?php aq_the_subjects($post->ID); ?></span>
+						</h2>						
+
 						<?php
 						
 						global $wp_query;

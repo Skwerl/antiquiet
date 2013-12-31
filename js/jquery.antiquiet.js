@@ -4,6 +4,10 @@ var scrollActive = true;
 function load_more_articles(flush,query) {
 	var params = {
 		"cat": aq_ajax_cat,
+		"tag": aq_ajax_tag,
+		"tax": aq_ajax_tax,
+		"term": aq_ajax_term,
+		"author": aq_ajax_author,
 		"paged": currentPage
 	};
 	$.post(aq_ajax_path+"ajax.articles.php", params, function(data) {

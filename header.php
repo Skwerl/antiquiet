@@ -57,23 +57,16 @@
 	GS_googleEnableAllServices();
 </script>
 <script type="text/javascript">
-	GA_googleAddSlot("ca-pub-2746694815475031", "300x100"); 
 	GA_googleAddSlot("ca-pub-2746694815475031", "728x90_home");
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_home");
-	GA_googleAddSlot("ca-pub-2746694815475031", "160x600_home");
-	GA_googleAddSlot("ca-pub-2746694815475031", "468x60_home");
 	GA_googleAddSlot("ca-pub-2746694815475031", "728x90_ros");
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_ros");
-	GA_googleAddSlot("ca-pub-2746694815475031", "160x600_ros");
-	GA_googleAddSlot("ca-pub-2746694815475031", "468x60_ros");
 	GA_googleAddSlot("ca-pub-2746694815475031", "728x90_ratedr");
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_ratedr");
-	GA_googleAddSlot("ca-pub-2746694815475031", "160x600_ratedr"); 
+	GA_googleAddSlot("ca-pub-2746694815475031", "300x100"); 
 	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_home"); 
 	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_ros");
 </script>
-
-<?php include(TEMPLATEPATH.'/ads/tag_festivalfever.php'); ?>
 
 <?php if (is_category('sessions')) { ?>
 	<script type="text/javascript">
@@ -93,6 +86,10 @@
 <script type="text/javascript">
 	var aq_ajax_path = "<?php echo get_stylesheet_directory_uri().'/ajax/'; ?>";
 	var aq_ajax_cat = "<?php echo get_query_var('cat'); ?>";
+	var aq_ajax_tag = "<?php echo get_query_var('tag'); ?>";
+	var aq_ajax_author = "<?php echo get_query_var('author'); ?>";
+	var aq_ajax_tax = false;
+	var aq_ajax_term = false;
 </script>
 
 <?php wp_head(); ?>

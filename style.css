@@ -488,21 +488,14 @@ article h2 {
 	font-size: 16px;
 	margin-bottom: 5px;
 }
-article h2 span.categories,
-article h2 span.categories a {
+article h2 span.subjects,
+article h2 span.subjects a {
 	color: #AA0A02;
 }
 article h3,
 article h3 a {
-	color: #AA0A02;
 	font-size: 14px;
 	font-weight: bold;
-	text-transform: uppercase;
-}
-article h4 {
-	font-size: 13px;
-	font-weight: bold;
-	text-transform: uppercase;
 }
 
 article .postflags {
