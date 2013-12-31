@@ -134,26 +134,34 @@ function aq_the_subjects($post_id,$link=true) {
 	if (!empty($subject_override)) {
 		echo $subject_override;
 	} else {
-		$artists = array();
+		$subjects = array();
 		$artist_tags = get_the_terms($post_id,'artist');
 		if (!empty($artist_tags)) {
 			foreach($artist_tags as $artist) {
 				if ($link) {
-					$artist_data = get_artist_data($artist->name);
-					$artist_page = $artist_data['url'];
-					if (!empty($artist_page) && $artist_page != get_permalink($post_id)) {
-						$artists[] = '<a href="'.$artist_page.'">'.$artist->name.'</a>';
-					} else {
-						$artists[] = $artist->name;
-					}
+					$subjects[] = '<a href="#">'.$artist->name.'</a>';
 				} else {
-					$artists[] = $artist->name;
+					$subjects[] = $artist->name;
 				}
 			} 
-			echo implode(', ',$artists);
-		} else {
-			echo 'Miscellaneous';
 		}
+		$post_categories = get_the_category($post_id);
+		if (!empty($post_categories)) {
+			foreach($post_categories as $cat) {
+				if ($link) {
+					$subjects[] = '<a href="#">'.$cat->name.'</a>';
+				} else {
+					$subjects[] = $cat->name;
+				}
+			}
+		}
+		
+		if (empty($subjects)) {
+			echo 'Miscellaneous';
+		} else {
+			echo implode(', ',$subjects);
+		}
+
 	}
 }
 
@@ -291,15 +299,6 @@ function aq_get_thumbnail($post_id, $size='thumbnail') {
 		$magic_thumb = magic_thumbnails($post_id,1,1,$width,$height);
 		return $magic_thumb['src'];
 	}
-}
-
-function aq_clean_periods($input) {
-	$input = trim($input);
-	if (substr_count($input,'.') == 1) {
-		$output = preg_replace('/(\.)$/','',$input);
-		return $output;
-	}
-	return $input;
 }
 
 function aq_format_tracklist($tracklist) {
@@ -520,11 +519,11 @@ function strip_excerpts($content) {
 	}
 	return $content;
 }  
-add_filter('the_excerpt', 'strip_excerpts');
-add_filter('get_the_excerpt', 'strip_excerpts');
+//add_filter('the_excerpt', 'strip_excerpts');
+//add_filter('get_the_excerpt', 'strip_excerpts');
 
-function custom_excerpt_length($length) { return 24; }
-add_filter('excerpt_length', 'custom_excerpt_length', 999);
+//function custom_excerpt_length($length) { return 24; }
+//add_filter('excerpt_length', 'custom_excerpt_length', 999);
 
 function add_aq_vars($public_query_vars) {
 	$public_query_vars[] = 'post_flag';

@@ -355,52 +355,27 @@ body.home #hero_wrapper {
 }
 #main_content .article_wrapper .text span {
 	display: block;
-	font-weight: bold;
-	text-transform: uppercase;
 	padding-left: 1px;
 }
-#main_content .article_wrapper .text span.date {
+#main_content .article_wrapper .text span.subjects {
 	color: #AA0A02;
-	font-size: 10px;
-	padding-top: 0px;
-}
-#main_content .article_wrapper .text span.bands {
-	margin-top: 3px;
+	margin-bottom: 3px;
+	text-transform: uppercase;
+	font-weight: bold;	
 }
 #main_content .article_wrapper .text span.title {
 	font-size: 18px;
-	margin-top: 1px;
+	margin-bottom: 3px;
+	text-transform: uppercase;
+	font-weight: bold;	
 }
-#main_content .article_wrapper .text span.subhead {
-	margin-top: 3px;
-	margin-bottom: 10px;
-}
-#main_content .article_wrapper .text span.category {
+#main_content .article_wrapper .text span.date {
 	color: #AA0A02;
-	display: inline;
+	font-size: 12px;
+	margin-bottom: 3px;
 }
-#main_content .article_wrapper .text span.author {
-	color: #AA0A02;
-	font-size: 10px;
-	margin-top: 3px;	
-}
-#main_content .article_wrapper .filters {
-	height: 32px;
-	margin-top: -5px;
-	margin-bottom: 5px;
-}
-#main_content .article_wrapper .filters .cat_bubble {
-	margin-left: -3px;
-}
-
-#main_content .article_wrapper .divider {
-	height: 1px;
-	width: auto;
-	background-color: #000;
-	background-image: url("images/article-fadeline.jpg");
-	background-position: 152px 0px;
-	background-repeat: no-repeat;
-	margin: 0px;
+#main_content .article_wrapper .text span.blurb {
+	//
 }
 
 /*////////////////// SINGLE TEMPLATE /////////////////////////////////////////////////////////////*/

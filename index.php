@@ -10,7 +10,12 @@
 
 		<div id="article_list">
 			
-			<div class="header arvo">Latest Articles</div>
+			<div class="list_header">
+			
+				<?php if (is_home()) { ?><div class="header arvo">Latest Articles</div><?php } ?>
+				<?php if (is_category()) { ?><div class="header arvo">All in <?php single_cat_title(); ?></div><?php } ?>
+
+			</div>
 
 			<div class="divider">&nbsp;</div>
 
@@ -19,9 +24,7 @@
 			</div>
 			<div id="scroller"><div class="label">&nbsp;</div></div>
 
-
 		</div>
-
 
 	</div>
 
