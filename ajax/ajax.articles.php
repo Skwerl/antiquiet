@@ -39,7 +39,7 @@ $args['tag'] = $tag;
 $args['author'] = $author;
 $args['numberposts'] = 20;
 $args['offset'] = $offset;
-if (!empty($taxonomy) && !empty($term)) {
+if ($tax != $term) {
 	$args['taxonomy'] = $tax;
 	$args['term'] = $term;
 }
@@ -53,7 +53,7 @@ foreach ($get_dem_posts as $post) {
 			<span class="subjects"><?php aq_the_subjects($post->ID, false); ?></span>
 			<span class="title arvo"><?php the_title(); ?></span>
 			<span class="date"><?php echo get_the_author(); ?> at <?php the_time('g:i A l, F jS Y'); ?></span>
-			<span class="blurb"><?php echo get_the_excerpt(); ?></span>
+			<span class="blurb"><p><?php echo get_the_excerpt(); ?></p></span>
 		</a></div>
 	</div><?php
 }

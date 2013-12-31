@@ -37,74 +37,23 @@ if (false === ($permanent_categories = get_transient('permanent-categories'))) {
 	set_transient('permanent-categories', $permanent_categories);
 }
 
-function aq_build_filters($display = false, $reset = false) {
-	$options = get_option('aq_theme_options');
-	$default_filters = json_decode($options['default_filters']);
-	$user_id = get_current_user_id();
-	$saved_filters = get_user_meta($user_id, 'saved_filters', true);
-	$queried_filters = get_query_var('post_filters');
-	if ($reset == true) {
-		$filters_array = $default_filters;	
-	} else {
-		if (!empty($queried_filters)) {
-			$filters_array = json_decode(stripslashes(html_entity_decode($queried_filters)));
-		} elseif (!empty($_COOKIE['saved_filters'])) {
-			$filters_array = json_decode(stripslashes(html_entity_decode($_COOKIE['saved_filters'])));
-			if ($user_id != 0) { update_user_meta($user_id, 'saved_filters', json_encode($filters_array)); }
-		} elseif ($user_id != 0 && !empty($saved_filters)) {
-			$filters_array = json_decode($saved_filters);
-		} else {
-			$filters_array = $default_filters;
-		}
+function aq_the_classes($post_id) {
+	global $wpdb;
+	if (false === ($classes = get_transient('post-classes-post-'.$post_id))) {
+		$post_categories = aq_get_categories($post_id);
+		$post_category_parents = aq_get_parents($post_id);
+		$post_tags = aq_get_tags($post_id);
+		$post_artists = aq_get_artists($post_id);
+		$post_genres = aq_get_genres($post_id);
+		$author_id = $wpdb->get_var($wpdb->prepare("SELECT post_author FROM $wpdb->posts WHERE ID = '$post_id';")); 		
+		$author_url = get_author_posts_url($author_id); 
+		$author_url_parts = array_filter(explode('/',$author_url));
+		$author_slug = 'author_'.array_pop($author_url_parts);
+		$classes = implode(' ', array_merge(array_keys($post_categories), array_keys($post_category_parents), array_keys($post_tags), array_keys($post_artists), array_keys($post_genres))).' '.$author_slug;
+		set_transient('post-classes-post-'.$post_id, $classes);
 	}
-	$filters_array = (object)array_merge((array)$default_filters,(array)$filters_array);
-	$taxonomy_filters = array();
-	foreach ($filters_array as $key => $data) {
-		$type = substr($key,0,1);
-		$txid = substr($key,1);
-		if ((!empty($queried_filters) || ($type == 'q' && empty($data[1]))) || isset($default_filters->$key)) {
-			switch ($type) {
-				case 'c': $rel = 'category'; break;
-				case 'g': $rel = 'genre'; break;
-				case 'q': $rel = 'query'; break;
-				case 't': $rel = 'tag'; break;
-				case 'x': $rel = 'xustom'; break;
-				default: $rel = '';
-			}
-			$toggle_state = '';
-			$toggle_name = $data[0];
-			if (empty($data[1])) {
-				$toggle_state = 'disabled';		
-				$taxonomy_filters[0][$rel][] = $txid;
-			} else {
-				$taxonomy_filters[1][$rel][] = $txid;
-			}
-			if ($display == true) {
-				if (!empty($toggle_name)) {
-					echo '<div id="taxonomy-'.$rel.'-'.$txid.'" class="cat_toggle '.$toggle_state.' '.$rel.'" rel="'.$rel.'"><span>'.$toggle_name.'</span></div>';
-				}
-			}
-		}
-	}
-	return $taxonomy_filters;
+	echo $classes;
 }
-
-function customize_rss_query($query) {
-    global $wp_the_query;
-    if (is_feed() && $wp_the_query === $query) {
-		if (isset($query->query_vars['post_filters'])) {
-			require_once(get_template_directory().'/aq-query.php');
-			$taxonomy_filters = aq_build_filters();
-			$post_ids = get_aq_posts($taxonomy_filters, 20, 'JUST_IDS');
-			$query_vars = $query->query_vars;
-			$query->init();
-			$query->query_vars = $query_vars;
-			$query->is_feed = true;
-			$query->query_vars['post__in'] = $post_ids; 
-        }
-    }
-}
-add_filter('pre_get_posts', 'customize_rss_query');
 
 function aq_the_pages($top=true) {
 	echo aq_get_pages($top);
@@ -164,28 +113,6 @@ function aq_the_subjects($post_id,$link=true) {
 	}
 }
 
-function aq_get_flags($post_id) {
-	$post_flags = array(
-		'postflag_audio',
-		'postflag_video',
-		'postflag_photos',
-		'postflag_live',
-		'postflag_tv',
-		'postflag_album',
-		'postflag_download',
-		'postflag_nsfw'
-	);
-	if (false === ($found = get_transient('post-flags-post-'.$post_id))) {
-		$found = array();
-		foreach ($post_flags as $flag) {
-			$value = get_post_meta($post_id, $flag, true);
-			if (!empty($value)) { $found[] = $flag; }
-		}
-		set_transient('post-flags-post-'.$post_id, $found);
-	}
-	return $found;
-}
-
 function aq_the_categories($post_id) {
 	echo implode(', ',array_values(aq_get_categories($post_id)));
 }
@@ -241,25 +168,6 @@ function aq_get_genres($post_id) {
 	$get_genres = get_the_terms($post_id,'genre');
 	if ($get_genres) { foreach($get_genres as $genre) { $genres['gen_'.$genre->term_id] = $genre->name; } }
 	return $genres;
-}
-
-function aq_the_classes($post_id) {
-	global $wpdb;
-	if (false === ($classes = get_transient('post-classes-post-'.$post_id))) {
-		$post_flags = aq_get_flags($post_id);
-		$post_categories = aq_get_categories($post_id);
-		$post_category_parents = aq_get_parents($post_id);
-		$post_tags = aq_get_tags($post_id);
-		$post_artists = aq_get_artists($post_id);
-		$post_genres = aq_get_genres($post_id);
-		$author_id = $wpdb->get_var($wpdb->prepare("SELECT post_author FROM $wpdb->posts WHERE ID = '$post_id';")); 		
-		$author_url = get_author_posts_url($author_id); 
-		$author_url_parts = array_filter(explode('/',$author_url));
-		$author_slug = 'author_'.array_pop($author_url_parts);
-		$classes = implode(' ', array_merge($post_flags, array_keys($post_categories), array_keys($post_category_parents), array_keys($post_tags), array_keys($post_artists), array_keys($post_genres))).' '.$author_slug;
-		set_transient('post-classes-post-'.$post_id, $classes);
-	}
-	echo $classes;
 }
 
 function aq_the_authors() {
@@ -511,15 +419,18 @@ function suppress_dead_spaces($content) {
 add_filter('the_content', 'suppress_dead_spaces',10);
 
 function strip_excerpts($content) {
-	$content = strip_tags($content);
-	if (strlen($content) > 120) {
-		$content = trim(substr($content, 0, 120));
+	$excerpt_length = 430;
+	$content = strip_shortcodes($content);
+	$content = strip_tags($content,'<i><em>');
+	if (strlen($content) > $excerpt_length) {
+		$content = trim(substr($content, 0, $excerpt_length));
 		$content .= '...';
 	}
+	$content .= '</i></em>'; // Hack because people are dumb!
 	return $content;
 }  
-//add_filter('the_excerpt', 'strip_excerpts');
-//add_filter('get_the_excerpt', 'strip_excerpts');
+add_filter('the_excerpt', 'strip_excerpts');
+add_filter('get_the_excerpt', 'strip_excerpts');
 
 //function custom_excerpt_length($length) { return 24; }
 //add_filter('excerpt_length', 'custom_excerpt_length', 999);
@@ -638,6 +549,12 @@ if (!function_exists('post_is_in_descendant_category')) {
 		return false;
 	}
 }
+
+function deprecated_shortcode($atts) {
+	return false;
+}
+add_shortcode('MYPLAYLIST', 'deprecated_shortcode');
+add_shortcode('MEDIA', 'deprecated_shortcode');
 
 // ancient chinese utilities
 

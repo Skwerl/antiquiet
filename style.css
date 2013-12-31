@@ -374,8 +374,8 @@ body.home #hero_wrapper {
 	font-size: 12px;
 	margin-bottom: 3px;
 }
-#main_content .article_wrapper .text span.blurb {
-	//
+#main_content .article_wrapper .text span.blurb p {
+	line-height: 1.2em;
 }
 
 /*////////////////// SINGLE TEMPLATE /////////////////////////////////////////////////////////////*/
@@ -1025,7 +1025,7 @@ ol.commentlist li.comment {
 #right_sidebar div.promo_300x100 {
 	width: 300px;
 	height: 100px;
-	margin-top: 6px;
+	margin-top: 8px;
 }
 
 #right_sidebar #link_dump {
