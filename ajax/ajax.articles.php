@@ -36,11 +36,13 @@ $offset = ($paged-1)*$ppp;
 $args = array();
 $args['cat'] = $cat;
 $args['tag'] = $tag;
-$args['taxonomy'] = $tax;
-$args['term'] = $term;
 $args['author'] = $author;
 $args['numberposts'] = 20;
 $args['offset'] = $offset;
+if (!empty($taxonomy) && !empty($term)) {
+	$args['taxonomy'] = $tax;
+	$args['term'] = $term;
+}
 $get_dem_posts = get_posts($args);
 
 foreach ($get_dem_posts as $post) {
