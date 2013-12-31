@@ -27,6 +27,11 @@ if (empty($term)) {
 	$term = get_query_var('term') ? get_query_var('term') : false;
 }
 
+$search = $_POST['search'];
+if (empty($search)) {
+	$search = get_query_var('s') ? get_query_var('s') : false;
+}
+
 if ($limit) { $ppp = $limit; }
 else { $ppp = intval(get_query_var('posts_per_page')); }
 
@@ -34,15 +39,21 @@ $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 $offset = ($paged-1)*$ppp;
 
 $args = array();
-$args['cat'] = $cat;
-$args['tag'] = $tag;
-$args['author'] = $author;
+if (empty($search)) {
+	$args['cat'] = $cat;
+	$args['tag'] = $tag;
+	$args['author'] = $author;
+	if ($tax != $term) {
+		$args['taxonomy'] = $tax;
+		$args['term'] = $term;
+	}
+} else {
+	$args['s'] = $search;
+}
+
 $args['numberposts'] = 20;
 $args['offset'] = $offset;
-if ($tax != $term) {
-	$args['taxonomy'] = $tax;
-	$args['term'] = $term;
-}
+
 $get_dem_posts = get_posts($args);
 
 foreach ($get_dem_posts as $post) {

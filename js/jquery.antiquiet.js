@@ -8,6 +8,7 @@ function load_more_articles(flush,query) {
 		"tax": aq_ajax_tax,
 		"term": aq_ajax_term,
 		"author": aq_ajax_author,
+		"search": aq_ajax_search,
 		"paged": currentPage
 	};
 	$.post(aq_ajax_path+"ajax.articles.php", params, function(data) {

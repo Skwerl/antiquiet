@@ -11,24 +11,26 @@
 		<div id="article_list">
 			
 			<div class="list_header">
+				<div class="header arvo">
 
-				<?php if (is_home()) { ?><div class="header arvo">Latest Articles</div><?php } ?>
-				<?php if (is_category()) { ?><div class="header arvo">All in <?php single_cat_title(); ?></div><?php } ?>
-				<?php if (is_tag()) { ?><div class="header arvo">Articles Tagged: <?php single_cat_title(); ?></div><?php } ?>
-				<?php if (is_author()) { ?><div class="header arvo">All by <?php the_author(); ?></div><?php } ?>
-
-				<?php if (is_tax()) {
-					$custom_tax = $wp_query->get_queried_object();
-					$artist_name = $custom_tax->name;
-					?><div class="header arvo">Articles About: <?php echo $artist_name; ?></div>
-					<script type="text/javascript">
-						aq_ajax_tax = "<?php echo $custom_tax->taxonomy; ?>";					
-						aq_ajax_term = "<?php echo $custom_tax->slug; ?>";					
-					</script><?php
-				} ?>
-
+					<?php if (is_home()) { ?>Latest Articles<?php } ?>
+					<?php if (is_category()) { ?>All in <?php single_cat_title(); } ?>
+					<?php if (is_tag()) { ?>Articles Tagged: <?php single_cat_title(); } ?>
+					<?php if (is_author()) { ?>All by <?php the_author(); } ?>
+					<?php if (is_search()) { ?>Search Results: <?php echo get_search_query(); } ?>
+	
+					<?php if (is_tax()) {
+						$custom_tax = $wp_query->get_queried_object();
+						$artist_name = $custom_tax->name;
+						?>Articles About: <?php echo $artist_name; ?>
+						<script type="text/javascript">
+							aq_ajax_tax = "<?php echo $custom_tax->taxonomy; ?>";					
+							aq_ajax_term = "<?php echo $custom_tax->slug; ?>";					
+						</script><?php
+					} ?>
+				
+				</div>
 			</div>
-
 			<div class="divider">&nbsp;</div>
 
 			<div id="article_loader">
@@ -48,6 +50,8 @@
 
 		<div class="sidebar_modules">
 	
+			<?php include('modules/search.php'); ?>
+
 			<?php include('modules/facebucket.php'); ?>
 		
 			<?php include('modules/twatter.php'); ?>

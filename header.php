@@ -88,6 +88,7 @@
 	var aq_ajax_cat = "<?php echo get_query_var('cat'); ?>";
 	var aq_ajax_tag = "<?php echo get_query_var('tag'); ?>";
 	var aq_ajax_author = "<?php echo get_query_var('author'); ?>";
+	var aq_ajax_search = "<?php echo get_search_query(); ?>";
 	var aq_ajax_tax = false;
 	var aq_ajax_term = false;
 </script>

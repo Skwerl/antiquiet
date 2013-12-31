@@ -98,8 +98,6 @@
 
 			<div class="promo_300x100"><?php include(TEMPLATEPATH.'/ads/gam_300x100.php'); ?></div>
 
-			<?php include(TEMPLATEPATH.'/modules/artists.php'); ?>
-
 			<?php include(TEMPLATEPATH.'/modules/recent.php'); ?>
 
 			<?php include(TEMPLATEPATH.'/modules/sponsor.php'); ?>
