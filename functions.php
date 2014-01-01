@@ -460,6 +460,14 @@ function render_divider($attr, $content = null) {
 	return '<div class="divider">&nbsp;</div>';
 }
 
+// extend user profile
+
+function modify_user_contact_methods($user_contact) {
+	$user_contact['twitter'] = __('Twitter Username'); 
+	return $user_contact;
+}
+add_filter('user_contactmethods', 'modify_user_contact_methods');
+
 // fix jw player embeds and stuff
 
 require_once(dirname(__FILE__).'/jw-player.php');

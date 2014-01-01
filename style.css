@@ -413,14 +413,6 @@ body.single #content_wrapper .column.left {
 	width: 300px;
 }
 
-#article_wrapper h4 {
-	margin-top: 4px;
-
-}
-#article_wrapper h4 span.date {
-
-}
-
 .page-links span {
 	font-size: 15px;
 	margin-right: 5px;
@@ -505,14 +497,25 @@ article h3 a {
 	font-size: 14px;
 	font-weight: bold;
 }
-
-article .postflags {
-	position: absolute;
-	top: -5px;
-	right: -3px;
+article h4 {
+	margin-top: 4px;
 }
-article .postflags .cat_bubble {
-	cursor: default;
+
+article .articlemeta p {
+	font-size: 12px;
+}
+article .articlemeta p {
+	margin: 0px;
+}
+article .articlemeta p span {
+	font-weight: bold;
+}
+article .articlemeta p a {
+	font-weight: normal;
+}
+article .articlemeta p.author_twitter {
+	margin-bottom: 2px;
+
 }
 
 /*////////////////// EMBEDLY LINK ////////////////////////////////////////////////////////////////*/

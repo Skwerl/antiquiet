@@ -53,6 +53,9 @@
 						}
 
 						?>
+
+						<?php include(TEMPLATEPATH.'/modules/articlemeta.php'); ?>
+
 					</article>
 
 					<?php
