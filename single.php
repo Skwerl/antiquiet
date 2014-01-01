@@ -10,6 +10,24 @@
 
 						<h3><span class="date">By <?php the_author_posts_link(); ?> at <?php the_time('g:i A l, F jS Y'); ?></span></h3>
 
+						<?php
+
+						$updated_date = get_post_meta($post->ID, 'postmeta_updated_date', true);
+						$updated_time = get_post_meta($post->ID, 'postmeta_updated_time', true);
+						$date_string = $updated_date;
+						$date_format = 'l, F jS Y';
+
+						if (!empty($updated_time)) {
+							$date_string .= ' '.$updated_time;
+							$date_format = 'g:i A l, F jS Y';
+						}
+
+						if (!empty($updated_date)) {
+							?><h4><span class="date">Updated <?php echo date($date_format,strtotime($date_string)); ?></span></h4><?php
+						}
+						
+						?>
+
 						<div class="divider">&nbsp;</div>
 
 						<h1 class="arvo"><span class="headline"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span></h1>
@@ -17,6 +35,8 @@
 						<h2 class="arvo">
 							<span class="subjects"><?php aq_the_subjects($post->ID); ?></span>
 						</h2>						
+
+						<div class="divider">&nbsp;</div>
 
 						<?php
 						

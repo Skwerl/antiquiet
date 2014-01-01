@@ -59,8 +59,21 @@ foreach ($album_posts as $post) {
 	$review = get_post_meta($post->ID, 'review-url', true);
 	$review_id = url_to_postid($review);
 
+	$album_cover = get_post_thumbnail_id($post->ID);
+	$fullsizepath = get_attached_file(album_cover);
+
 	if (!empty($review_id)) {
+
 		echo 'Updating '.$review_id.': '.$review.'<br/>';
+
+		$metadata = wp_generate_attachment_metadata($album_cover, $fullsizepath);
+		wp_update_attachment_metadata($album_cover, $metadata);
+
+		$cover_attachment = get_post($album_cover);
+		$cover_attachment->post_parent = $review_id;
+		$move = wp_update_post($cover_attachment);
+		add_post_meta($review_id, 'release-cover', $album_cover, true);
+
 		add_post_meta($review_id, 'release-date', $release_date, true);
 		add_post_meta($review_id, 'release-title', $release_title, true);
 		add_post_meta($review_id, 'release-rating', $rating, true);
@@ -68,6 +81,7 @@ foreach ($album_posts as $post) {
 		add_post_meta($review_id, 'release-amazon', $release_amazon, true);
 		add_post_meta($review_id, 'release-itunes', $release_itunes, true);
 		add_post_meta($review_id, 'release-label', $release_label, true);
+
 	}
 
 }

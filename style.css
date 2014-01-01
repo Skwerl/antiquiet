@@ -350,7 +350,7 @@ body.home #hero_wrapper {
 	border: 1px solid #000;
 }
 #main_content .article_wrapper .text {
-	max-height: 151px;
+	max-height: 145px;
 	overflow: hidden;
 }
 #main_content .article_wrapper .text span {
@@ -411,6 +411,14 @@ body.single #content_wrapper .column.left {
 
 #article_wrapper .column.right {
 	width: 300px;
+}
+
+#article_wrapper h4 {
+	margin-top: 4px;
+
+}
+#article_wrapper h4 span.date {
+
 }
 
 .page-links span {
@@ -507,7 +515,57 @@ article .postflags .cat_bubble {
 	cursor: default;
 }
 
-/*////////////////// CATEGORY TEMPLATE /////////////////////////////////////////////////////////////*/
+/*////////////////// EMBEDLY LINK ////////////////////////////////////////////////////////////////*/
+
+div.mceItemEmbedly {
+	max-width: 626px !important;
+	background-color: #FFF1B9;
+}
+
+div.embedly {
+	position: relative;
+	margin: 0px;
+	padding: 10px;
+	line-height: 1.4em;
+	font-size: 11px;
+}
+
+div.embedly .embedly-title {
+	padding-top: 6px;
+	color: #B60000;
+	font-family: "Arvo", Arial, Helvetica, sans-serif;
+	font-size: 16px !important;
+	font-weight: bold;
+	text-transform: uppercase;
+	
+}
+
+div.embedly .embedly-thumbnail-small {
+	margin-right: 10px !important;
+	margin-bottom: 0px !important;
+}
+
+div.embedly .media-attribution {
+	width: 596px;
+	padding: 10px;
+	margin-top: -12px;
+	color: #FFF;
+	background-color: #000;
+	font-size: 11px;
+	line-height: 1.0em;	
+}
+
+div.embedly .media-attribution a {
+	color: #FFF;
+}
+
+span.embedly-powered {
+	position: absolute;
+	right: 0px;
+	bottom: 7px;
+}
+
+/*////////////////// SESSIONS PAGE ///////////////////////////////////////////////////////////////*/
 
 body.category #everything_wrapper {
 	border-bottom-left-radius: 10px;
@@ -531,66 +589,7 @@ body.category .bigbanner {
 	margin-bottom: 15px;
 }
 
-/*////////////////// ARTIST PAGE /////////////////////////////////////////////////////////////////*/
-
-#content_wrapper.artist h1 span.headline {
-	font-size: 42px;
-}
-#content_wrapper.artist article .image {
-	float: left;
-	border: 1px solid #000;
-	margin-right: 15px;
-	margin-bottom: 17px;
-}
-#content_wrapper.artist article .meta {
-	font-size: 14px;
-	font-weight: bold;
-}
-
-#main_content.album_list {
-	margin-left: -6px;
-	margin-bottom: -11px;
-}
-#main_content.album_list h2.header {
-	margin: 8px 0px 17px 6px;
-	font-size: 18px;
-}
-#main_content.album_list .album_cover {
-	float: left;
-	width: 150px;
-	height: 150px;
-	margin-left: 6px;
-	margin-bottom: 6px;
-	border: 1px solid #000;
-}
-
-#main_content.static_list {
-	margin-bottom: -5px;
-}
-#main_content.static_list h2.header {
-	margin: 8px 0px 17px;
-	font-size: 18px;
-}
-#main_content.static_list .article_wrapper {
-	clear: both;
-	height: auto;
-	margin-bottom: 0px;
-}
-#main_content.static_list .article_wrapper .text span.title {
-	font-size: 16px;
-}
-#main_content.static_list .article_wrapper .thumbnail,
-#main_content.static_list .article_wrapper .thumbnail img {
-	width: 75px;
-	height: 75px;
-}
-
-#content_wrapper.artist .article_body .clear.shim {
-	clear: both;
-	height: 10px;
-}
-
-/*////////////////// ALBUM PAGE //////////////////////////////////////////////////////////////////*/
+/*////////////////// ALBUM DETAIL ////////////////////////////////////////////////////////////////*/
 
 .album_detail h2 {
 	font-size: 18px;
