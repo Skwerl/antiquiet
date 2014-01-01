@@ -1,5 +1,9 @@
 /* yeah, skwerl is this anal retentive. */
 
+div.mf_file_list_show {
+	display: none;
+}
+
 #set-post-thumbnail img {
 	width: 257px;
 	height: auto;

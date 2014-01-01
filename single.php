@@ -36,47 +36,15 @@
 					</article>
 
 					<?php
-					
-					$main_post = $post;
-					$main_post_id = $post->ID;
-					
+
 					$category_to_check = get_term_by('name', 'reviews', 'category');
 					if (in_category('reviews') || post_is_in_descendant_category($category_to_check->term_id)) {
-
-						if (false === ($album_id = get_transient('album-for-review-'.$post->ID))) {
-							$artists = get_the_terms($post->ID,'artist');
-							foreach ($artists as $artist) { $artist_ids[] = $artist->term_id; }
-							$albums = get_posts(array(
-								'numberposts' => -1,
-								'tax_query' => array(array('taxonomy'=>'artist','field'=>'id','terms'=>$artist_ids)),
-								'post_type' => 'album-page'
-							));
-							foreach ($albums as $post) {
-								setup_postdata($post);
-								$review = get_post_meta($post->ID, 'review-url', true);
-								$review_id = url_to_postid($review);
-								if ($review_id == $main_post_id) {
-									$album_id = $post->ID;
-									break;
-								}
-							}
-							set_transient('album-for-review-'.$post->ID, $album_id);
-						}
-												
-						if (!empty($album_id)) {
-							echo '<div class="divider">&nbsp;</div>';
-							$review_page = true;
-							include(TEMPLATEPATH.'/modules/album.php');
-						}
-
+						include(TEMPLATEPATH.'/modules/album.php');
 					}
 
 					include(TEMPLATEPATH.'/modules/previously.php');
 
 					include(TEMPLATEPATH.'/modules/zerg.php');
-
-					$post = $main_post;
-					setup_postdata($post);
 
 					?>
 

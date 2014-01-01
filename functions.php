@@ -1,8 +1,6 @@
 <?php
 
 if (!isset($content_width)) $content_width = 626;
-
-require_once(dirname(__FILE__).'/theme-options.php');
 if (!class_exists('htmlparser_class')) { require_once(dirname(__FILE__).'/class/htmlparser.php'); }
 
 function custom_js_scripts() {
