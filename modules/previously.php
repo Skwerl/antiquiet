@@ -10,7 +10,7 @@ if (in_category('sessions')) {
 	$header_text = 'All '.$category[0]->cat_name;
 } else {
 	if (false === ($previously = get_transient('previous-posts-post-'.$post->ID))) {
-		$previously = get_internal_links(get_the_content(), array('antiquiet.staging.wpengine.com'));
+		$previously = get_internal_links(get_the_content(), array('antiquiet.com'));
 		set_transient('previous-posts-post-'.$post->ID, $previously);
 	}
 	$header_text = 'Previously...';
