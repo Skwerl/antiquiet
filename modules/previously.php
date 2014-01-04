@@ -1,6 +1,6 @@
 <?php
 
-if (in_category($permanent_categories) && !in_category('secret') && !in_category('news')) {
+if (in_category('sessions')) {
 	$previously = array();
 	$category = get_the_category(); 
 	$category_posts = get_posts(array('numberposts'=>-1, 'category'=>$category[0]->cat_ID));
@@ -10,7 +10,7 @@ if (in_category($permanent_categories) && !in_category('secret') && !in_category
 	$header_text = 'All '.$category[0]->cat_name;
 } else {
 	if (false === ($previously = get_transient('previous-posts-post-'.$post->ID))) {
-		$previously = get_internal_links(get_the_content(), array('antiquiet.com'));
+		$previously = get_internal_links(get_the_content(), array('antiquiet.staging.wpengine.com'));
 		set_transient('previous-posts-post-'.$post->ID, $previously);
 	}
 	$header_text = 'Previously...';

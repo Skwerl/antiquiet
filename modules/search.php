@@ -14,7 +14,7 @@
 			<input type="text" name="s" id="s" value="<?php echo $querystring; ?>"
 			onblur="if (this.value == '') { this.value = '<?php echo $searchstring; ?>'; }"
 			onfocus="if (this.value == '<?php echo $searchstring; ?>') { this.value = ''; }" />
-			<input type="submit" id="searchsubmit" value="Suck It" />
+			<input type="submit" id="searchsubmit" value="Go" />
 		</div>
 	</form>
 	

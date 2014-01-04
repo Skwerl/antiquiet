@@ -50,6 +50,8 @@
 
 		<div class="sidebar_modules">
 	
+			<?php include('modules/categories.php'); ?>
+			
 			<?php include('modules/search.php'); ?>
 
 			<?php include('modules/facebucket.php'); ?>
@@ -65,7 +67,5 @@
 	<div class="clear"></div>
 
 </div>
-
-<?php include('js/navigator.php'); ?>
 
 <?php get_footer(); ?>
