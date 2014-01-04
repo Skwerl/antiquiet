@@ -1184,3 +1184,12 @@ img#wpstats {
 #TB_window img#TB_Image {
 	border: none !important;
 }
+
+div.nsfw_ad_block {
+	color: #FFF;
+	background-color: #000;
+	text-align: center;
+}
+div.nsfw_ad_block > div {
+	padding: 40px;
+}

@@ -307,11 +307,12 @@ function get_internal_links($content, $domains) {
 }
 
 function is_nsfw() {
-	if (is_single() || is_attachment()) {
-		global $post;
-		if (is_single()) { @$nsfw = get_post_meta($post->ID, 'postflag_nsfw', true); }
-		if (is_attachment()) { @$nsfw = get_post_meta($post->post_parent, 'postflag_nsfw', true); }
-		if (!empty($nsfw)) { return true; }
+	global $post;
+	if (is_tag('nsfw')) {
+		return true;
+	}
+	if (has_tag('nsfw', $post->ID)) {
+		return true;
 	}
 	return false;
 }
@@ -385,8 +386,17 @@ function link_artist_names($content) {
 // miscellaneous overrides...
 
 function hide_from_lists($query) {
+	if (!is_single()) {
+		$tag = $query->get('tag');
+		if ($tag != 'nsfw') {
+			$nsfw_tags = array(2314);
+			$query->set('tag', '');
+			$query->set('tag_slug__in', array());
+			$query->set('tag__not_in',$nsfw_tags);
+		}
+	}
 	if (!is_single() && !is_admin()) {
-		$query->set('cat','-2582');
+		$query->set('cat','-2582'); // "Secret" Posts
 	}
 }
 add_action('pre_get_posts', 'hide_from_lists');
