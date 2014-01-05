@@ -423,6 +423,16 @@ add_image_size('itsy-bitsy',27,27,true);
 add_image_size('artist-thumb',75,75,true);
 add_image_size('feature-panel',660,358,true);
 
+function float_spotify_embeds($content) {
+	$replace = preg_replace('/<iframe.*src=\"(http[s]?:\/\/embed\.spotify\.com.*)\".*width=\"(\d+)\".*height=\"(\d+)\".*><\/iframe>/', '<div class="spotify_embed" style="width: $2px; height: $3px;">$0</div>', $content);
+	if ($content != $replace) {
+		$content = $replace;
+		$content .= '<div class="clearing"></div>';
+	}
+	return $content;
+}
+add_filter('the_content', 'float_spotify_embeds',11);
+
 function suppress_dead_spaces($content) {
 	$content = preg_replace('/&nbsp;/', ' ', $content);
 	return $content;
