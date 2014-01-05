@@ -314,6 +314,9 @@ function is_nsfw() {
 	if (has_tag('nsfw', $post->ID)) {
 		return true;
 	}
+	if (has_tag('nsfw', $post->post_parent)) {
+		return true;
+	}
 	return false;
 }
 
@@ -468,6 +471,17 @@ add_filter('get_comments_number', 'comment_count', 0);
 add_shortcode('divider', 'render_divider');
 function render_divider($attr, $content = null) {
 	return '<div class="divider">&nbsp;</div>';
+}
+
+// kill auto-embedded videos on facebook
+
+add_filter('sfc_base_meta','kill_sfc_video', 11, 2);
+function kill_sfc_video($og, $post) {	
+	unset($og['og:video']);
+	unset($og['og:video:height']);
+	unset($og['og:video:width']);
+	unset($og['og:video:type']);
+	return $og;
 }
 
 // extend user profile

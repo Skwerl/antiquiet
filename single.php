@@ -91,7 +91,7 @@
 
 			<?php include(TEMPLATEPATH.'/modules/recent.php'); ?>
 
-			<?php include(TEMPLATEPATH.'/modules/sponsor.php'); ?>
+			<?php #include(TEMPLATEPATH.'/modules/sponsor.php'); ?>
 
 		</div>
 
