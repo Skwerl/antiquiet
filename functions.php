@@ -424,8 +424,16 @@ add_image_size('artist-thumb',75,75,true);
 add_image_size('feature-panel',660,358,true);
 
 function float_spotify_embeds($content) {
-	$replace = preg_replace('/<iframe.*src=\"(http[s]?:\/\/embed\.spotify\.com.*)\".*width=\"(\d+)\".*height=\"(\d+)\".*><\/iframe>/', '<div class="spotify_embed" style="width: $2px; height: $3px;">$0</div>', $content);
-	if ($content != $replace) {
+	$replace = preg_replace_callback(
+		'/<iframe.*src=\"(http[s]?:\/\/embed\.spotify\.com.*)\".*width=\"(\d+)\".*height=\"(\d+)\".*><\/iframe>/',
+		function ($matches) {
+			if ($matches[2] < 626) { // Only float small playlists...
+				$return = '<div class="spotify_embed" style="width: '.$matches[2].'px; height: '.$matches[3].'px;">'.$matches[0].'</div>';			
+			} else { $return = $matches[0]; }
+			return $return;
+		}, $content
+	);
+	if ($content != $replace) { // If we've floated something, add a clearing div:
 		$content = $replace;
 		$content .= '<div class="clearing"></div>';
 	}
@@ -546,16 +554,10 @@ function set_default_admin_view($user_id) {
 	$user = get_userdata($user_id);
 	if ($user->user_level) {
 		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'manageedit-postcolumnshidden', 'a:2:{i:0;s:4:"tags";i:1;s:0:"";}'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'metaboxhidden_post', 'a:4:{i:0;s:13:"trackbacksdiv";i:1;s:10:"postcustom";i:2;s:7:"slugdiv";i:3;s:5:"aiosp";}'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'meta-box-order_post', 'a:3:{s:4:"side";s:102:"postimagediv,feature-panel,categorydiv,coauthorsdiv,tagsdiv-artist,genrediv,tagsdiv-post_tag,submitdiv";s:6:"normal";s:99:"postexcerpt,trackbacksdiv,postcustom,post-flags,custom-subject,commentstatusdiv,commentsdiv,slugdiv";s:8:"advanced";s:5:"aiosp";}'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'metaboxhidden_artist-page', 'a:3:{i:0;s:11:"postexcerpt";i:1;s:10:"postcustom";i:2;s:7:"slugdiv";}'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'meta-box-order_artist-page', 'a:3:{s:4:"side";s:60:"postimagediv,submitdiv,tagsdiv-artist,genrediv,pageparentdiv";s:6:"normal";s:74:"postexcerpt,artist-details,postcustom,commentstatusdiv,commentsdiv,slugdiv";s:8:"advanced";s:0:"";}'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'metaboxhidden_album-page', 'a:3:{i:0;s:11:"postexcerpt";i:1;s:10:"postcustom";i:2;s:7:"slugdiv";}'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'meta-box-order_album-page', 'a:3:{s:4:"side";s:46:"postimagediv,tagsdiv-artist,genrediv,submitdiv";s:6:"normal";s:73:"album-details,postexcerpt,postcustom,commentstatusdiv,commentsdiv,slugdiv";s:8:"advanced";s:0:"";}'));
+		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'metaboxhidden_post', 'a:5:{i:0;s:13:"trackbacksdiv";i:1;s:10:"postcustom";i:2;s:7:"slugdiv";i:3;s:12:"sharing_meta";i:4;s:5:"aiosp";}'));
+		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'meta-box-order_post', 'a:3:{s:4:"side";s:98:"authordiv,submitdiv,updated,postimagediv,categorydiv,tagsdiv-artist,tagsdiv-post_tag,feature-panel";s:6:"normal";s:101:"trackbacksdiv,postexcerpt,postcustom,custom-subject,album-review,commentstatusdiv,slugdiv,commentsdiv";s:8:"advanced";s:18:"sharing_meta,aiosp";}'));
 		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'screen_layout_post', '2'));
 		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'screen_layout_mini-post', '2'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'screen_layout_artist-page', '2'));
-		$wpdb->query($wpdb->prepare("INSERT INTO $wpdb->usermeta (user_id, meta_key, meta_value) VALUES (%d, %s, %s)", $user_id, 'screen_layout_album-page', '2'));
 	}
 } add_action('user_register', 'set_default_admin_view');
 
