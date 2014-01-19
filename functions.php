@@ -43,7 +43,7 @@ function aq_the_classes($post_id) {
 		$post_tags = aq_get_tags($post_id);
 		$post_artists = aq_get_artists($post_id);
 		$post_genres = aq_get_genres($post_id);
-		$author_id = $wpdb->get_var($wpdb->prepare("SELECT post_author FROM $wpdb->posts WHERE ID = '$post_id';")); 		
+		$author_id = $wpdb->get_var($wpdb->prepare("SELECT post_author FROM $wpdb->posts WHERE ID = %d",$post_id)); 		
 		$author_url = get_author_posts_url($author_id); 
 		$author_url_parts = array_filter(explode('/',$author_url));
 		$author_slug = 'author_'.array_pop($author_url_parts);
@@ -62,7 +62,13 @@ function aq_get_pages($top=true) {
 	$all_link = '<a href="'.get_permalink().'?all=true" class="all_link"><span>All</span></a>';
 	$divider_top = '<div class="divider">&nbsp;</div>';
 	$divider_bottom = $divider_top;
-	if ($top == false) { $divider_bottom = ''; $all_link = ''; $type = 'next'; }
+	if ($top == false) {
+		$divider_bottom = '';
+		$all_link = '';
+		$type = 'next';
+	} else {
+		$divider_top = '';
+	}
 	$page_links = wp_link_pages(array(
 		'before' => $divider_top.'<div class="page-links"><span class="header">Pages:</span>',
 		'after' => $all_link.'</div>'.$divider_bottom,
@@ -416,14 +422,24 @@ function remove_menus() {
 add_action('admin_menu', 'remove_menus');
 
 add_theme_support('automatic-feed-links');
-
 add_theme_support('post-thumbnails', array('post','artist-page','album-page'));
 
 add_image_size('itsy-bitsy',27,27,true);
 add_image_size('artist-thumb',75,75,true);
 add_image_size('feature-panel',660,358,true);
 
-function float_spotify_embeds($content) {
+function prioritize_tops($cat, $cats, $post) {
+	if (in_category('music', $post)) {
+		$cat = get_category_by_slug('music');
+	}
+	if (in_category('movies', $post)) {
+		$cat = get_category_by_slug('movies');
+	}
+	return $cat;
+}
+add_action('post_link_category', 'prioritize_tops', 10, 3);
+
+function float_spotify_embeds1($content) {
 	$replace = preg_replace_callback(
 		'/<iframe.*src=\"(http[s]?:\/\/embed\.spotify\.com.*)\".*width=\"(\d+)\".*height=\"(\d+)\".*><\/iframe>/',
 		function ($matches) {
@@ -439,7 +455,32 @@ function float_spotify_embeds($content) {
 	}
 	return $content;
 }
-add_filter('the_content', 'float_spotify_embeds',11);
+function float_spotify_embeds2($content) {
+	$replace = preg_replace_callback(
+		'/<iframe.*src=\"(http[s]?:\/\/embed\.spotify\.com.*)\".*height=\"(\d+)\".*width=\"(\d+)\".*><\/iframe>/',
+		function ($matches) {
+			if ($matches[2] < 626) { // Only float small playlists...
+				$return = '<div class="spotify_embed" style="width: '.$matches[3].'px; height: '.$matches[2].'px;">'.$matches[0].'</div>';			
+			} else { $return = $matches[0]; }
+			return $return;
+		}, $content
+	);
+	if ($content != $replace) { // If we've floated something, add a clearing div:
+		$content = $replace;
+		$content .= '<div class="clearing"></div>';
+	}
+	return $content;
+}
+add_filter('the_content', 'float_spotify_embeds1',11);
+add_filter('the_content', 'float_spotify_embeds2',12);
+
+#add_filter('oembed_result','twitter_no_width',10,3);
+function twitter_no_width($html, $url, $args) {
+	if (false !== strpos($url, 'twitter.com')) {
+		$html = str_replace('width="626"','width="200"',$html);
+	}
+	return $html;
+}
 
 function suppress_dead_spaces($content) {
 	$content = preg_replace('/&nbsp;/', ' ', $content);

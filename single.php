@@ -52,6 +52,8 @@
 							aq_the_pages(false);
 						}
 
+						$main_post_id = $post->ID;
+
 						?>
 
 						<?php include(TEMPLATEPATH.'/modules/articlemeta.php'); ?>
