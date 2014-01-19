@@ -2,26 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title><?php
-	global $page, $paged;
-	$site_description = get_bloginfo('description', 'display');
-	if ($site_description && (is_home() || is_front_page())) {
-		echo $site_description;
-	} else {
-		$category = get_the_category();
-		$category_name = $category[0]->name;
-		if ($category_name == 'Shows') { $category_name = 'Show Reviews'; }
-		if ($category_name == 'Antiquiet Sessions') { $category_name = 'Sessions'; }
-		if (is_category()) {
-			echo $category_name;					
-		} else {
-			the_title();
-		}
-	}
-	if ($paged >= 2 || $page >= 2) echo ' | '.sprintf(__('Page %s', 'aq6'), max($paged, $page));
-	echo ' @ '; bloginfo('name');
-	if (!is_category()) { echo ' '.$category_name; }
-?></title>
+<title><?php the_title(); ?></title>
 
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />
 

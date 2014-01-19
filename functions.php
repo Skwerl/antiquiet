@@ -399,13 +399,16 @@ function hide_from_lists($query) {
 		$tag = $query->get('tag');
 		if ($tag != 'nsfw') {
 			$nsfw_tags = array(2314);
-			$query->set('tag', '');
-			$query->set('tag_slug__in', array());
+			$query->set('tag', $query->get('tag'));
+			$query->set('tag_slug__in', $query->get('tag_slug__in'));
 			$query->set('tag__not_in',$nsfw_tags);
 		}
 	}
 	if (!is_single() && !is_admin()) {
-		$query->set('cat','-2582'); // "Secret" Posts
+		$cats_string = array();
+		$cats_string[] = $query->get('cat');
+		$cats_string[] = '-2582'; // Hide "Secret" Posts
+		$query->set('cat',implode(',',$cats_string));
 	}
 }
 add_action('pre_get_posts', 'hide_from_lists');

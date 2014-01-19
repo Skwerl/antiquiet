@@ -15,7 +15,7 @@
 
 					<?php if (is_home()) { ?>Latest Articles<?php } ?>
 					<?php if (is_category()) { ?>All in <?php single_cat_title(); } ?>
-					<?php if (is_tag()) { ?>Articles Tagged: <?php single_cat_title(); } ?>
+					<?php if (is_tag()) { ?>Articles Tagged: <?php single_tag_title(); } ?>
 					<?php if (is_author()) { ?>All by <?php the_author(); } ?>
 					<?php if (is_search()) { ?>Search Results: <?php echo get_search_query(); } ?>
 	
