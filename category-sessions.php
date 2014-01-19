@@ -16,6 +16,10 @@
 
 					<div class="divider">&nbsp;</div>
 
+					<div class="bigbanner"><a href="/exclusive/sessions/2014/01/mike-doughty-plays-soul-coughing/">
+						<img src="http://cdn.antiquiet.com/wp-content/uploads/2014/01/doughty-big.jpg" />
+					</a></div>
+
 					<div class="bigbanner"><a href="/exclusive/sessions/2013/08/pos-antiquiet-session/">
 						<img src="http://cdn.antiquiet.com/wp-content/uploads/2013/07/pos-big-banner.jpg" />
 					</a></div>
