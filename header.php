@@ -71,11 +71,11 @@
 <?php if (is_category('sessions')) { ?>
 	<script type="text/javascript">
 		GA_googleAddAttr("Sessions", "1");
-		GA_googleAddAttr("Level", "4");
+		GA_googleAddAttr("Level", "3");
 	</script>
 <?php } else { ?>
 	<script type="text/javascript">
-		GA_googleAddAttr("Level", "3"); // Temporary House Ads
+		GA_googleAddAttr("Level", "1");
 	</script>
 <?php } ?>
 

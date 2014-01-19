@@ -91,11 +91,14 @@ span.special {
 }
 
 blockquote {
-	font-style: italic;
 	padding: 10px 20px;
 	background-color: #FFF1B9;
 	border-radius: 8px;
 	-moz-border-radius: 8px;
+	background-image: url("images/blockquote.gif");
+	backgroud-position: left top;
+	background-repeat: no-repeat;
+	
 }
 
 .arvo {
@@ -811,7 +814,6 @@ body.single div.recent_teaser div.clear {
 
 #comments_wrapper {
 	position: relative;
-	min-height: 600px;
 	padding-bottom: 15px;
 }
 
