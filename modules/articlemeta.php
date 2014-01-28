@@ -1,4 +1,4 @@
-<div class="divider">&nbsp;</div>
+<div class="divider clear">&nbsp;</div>
 
 <div class="articlemeta">
 	

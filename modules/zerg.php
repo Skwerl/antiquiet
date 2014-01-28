@@ -1,6 +1,6 @@
 <div id="zerg">
 
-	<div class="divider">&nbsp;</div>
+	<div class="divider clear">&nbsp;</div>
 
 	<h2 class="arvo">Meanwhile, On The Internet...</h2>
 

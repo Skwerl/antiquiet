@@ -18,7 +18,7 @@ if (in_category('sessions')) {
 
 if (!empty($previously)) {
 	?><div class="previously">
-		<div class="divider">&nbsp;</div>
+		<div class="divider clear">&nbsp;</div>
 		<h2 class="arvo"><?php echo $header_text; ?></h2>
 		<ul><?php
 			foreach($previously as $link) {

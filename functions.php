@@ -60,7 +60,7 @@ function aq_get_pages($top=true) {
 	global $post;
 	$type = 'number';
 	$all_link = '<a href="'.get_permalink().'?all=true" class="all_link"><span>All</span></a>';
-	$divider_top = '<div class="divider">&nbsp;</div>';
+	$divider_top = '<div class="divider clear">&nbsp;</div>';
 	$divider_bottom = $divider_top;
 	if ($top == false) {
 		$divider_bottom = '';
