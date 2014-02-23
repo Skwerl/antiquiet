@@ -435,6 +435,9 @@ function prioritize_tops($cat, $cats, $post) {
 	if (in_category('music', $post)) {
 		$cat = get_category_by_slug('music');
 	}
+	if (in_category('reviews', $post)) {
+		$cat = get_category_by_slug('reviews');
+	}
 	if (in_category('movies', $post)) {
 		$cat = get_category_by_slug('movies');
 	}
