@@ -352,6 +352,10 @@ body.home #hero_wrapper {
 	background-image: radial-gradient(center center, circle contain, #FFE090 0%, #F5D148 100%);
 	border: 1px solid #000;
 }
+#main_content .article_wrapper .thumbnail img {
+	width: 150px;
+	height: 150px;
+}
 #main_content .article_wrapper .text {
 	max-height: 145px;
 	overflow: hidden;
@@ -379,6 +383,29 @@ body.home #hero_wrapper {
 }
 #main_content .article_wrapper .text span.blurb p {
 	line-height: 1.2em;
+}
+
+#main_content .article_wrapper.reviews .text {
+	max-height: 152px;
+}
+#main_content .article_wrapper.reviews .text span.title {
+	padding-top: 5px;
+	margin-bottom: 3px;
+	clear: both;
+}
+#main_content .article_wrapper .text span.artist {
+	text-transform: uppercase;
+	font-weight: bold;	
+}
+#main_content .article_wrapper .text span.album {
+	margin-bottom: 4px;
+	text-transform: uppercase;
+	font-weight: bold;	
+}
+#main_content .article_wrapper .text span.stars {
+	display: block;
+	text-transform: uppercase;
+	font-weight: bold;	
 }
 
 /*////////////////// SINGLE TEMPLATE /////////////////////////////////////////////////////////////*/

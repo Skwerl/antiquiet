@@ -10,21 +10,11 @@ $rating = get_post_meta($post->ID, 'release-rating', true);
 
 if (!empty($release_title)) {
 
-
-#$release_date = date($date_format,strtotime($release_date));
-
+	$release_date = date('j/m/Y',strtotime($release_date));
 
 	$artists = get_the_terms($post->ID,'artist');
-	$artist = array('name'=>$artists[0]->name,'id'=>$artists[0]->term_id);
-
-	$artist_data = get_artist_data($artist['name']);
-	$artist_page = $artist_data['url'];
-	
-	if (!empty($artist_page) && $artist_page != get_permalink($post->ID)) {
-		$artist_display = '<a href="'.$artist_page.'">'.$artist['name'].'</a>';
-	} else {
-		$artist_display = $artist['name'];
-	}
+	$artist = array('name'=>$artists[0]->name,'slug'=>$artists[0]->slug);
+	$artist_display = '<a href="/artist/'.$artist['slug'].'">'.$artist['name'].'</a>';
 
 	?><div class="divider">&nbsp;</div>
 	<div class="album_detail">

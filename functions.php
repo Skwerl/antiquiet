@@ -42,12 +42,11 @@ function aq_the_classes($post_id) {
 		$post_category_parents = aq_get_parents($post_id);
 		$post_tags = aq_get_tags($post_id);
 		$post_artists = aq_get_artists($post_id);
-		$post_genres = aq_get_genres($post_id);
 		$author_id = $wpdb->get_var($wpdb->prepare("SELECT post_author FROM $wpdb->posts WHERE ID = %d",$post_id)); 		
 		$author_url = get_author_posts_url($author_id); 
 		$author_url_parts = array_filter(explode('/',$author_url));
 		$author_slug = 'author_'.array_pop($author_url_parts);
-		$classes = implode(' ', array_merge(array_keys($post_categories), array_keys($post_category_parents), array_keys($post_tags), array_keys($post_artists), array_keys($post_genres))).' '.$author_slug;
+		$classes = implode(' ', array_merge(array_keys($post_categories), array_keys($post_category_parents), array_keys($post_tags), array_keys($post_artists))).' '.$author_slug;
 		set_transient('post-classes-post-'.$post_id, $classes);
 	}
 	echo $classes;
@@ -82,7 +81,7 @@ function aq_get_pages($top=true) {
 	return $page_links;
 }
 
-function aq_the_subjects($post_id,$link=true) {
+function aq_the_subjects($post_id,$link=true,$cats=true) {
 	$subject_override = get_post_meta($post_id, 'subject_override', true);
 	if (!empty($subject_override)) {
 		$subjects[] = $subject_override;
@@ -99,14 +98,16 @@ function aq_the_subjects($post_id,$link=true) {
 			} 
 		}
 	}
-	$post_categories = get_the_category($post_id);
-	if (!empty($post_categories)) {
-		foreach($post_categories as $cat) {
-			$cat_link = str_replace('/./','/',get_category_link($cat->cat_ID));
-			if ($link) {
-				$subjects[] = '<a href="'.$cat_link.'">'.$cat->name.'</a>';
-			} else {
-				$subjects[] = $cat->name;
+	if ($cats) {
+		$post_categories = get_the_category($post_id);
+		if (!empty($post_categories)) {
+			foreach($post_categories as $cat) {
+				$cat_link = str_replace('/./','/',get_category_link($cat->cat_ID));
+				if ($link) {
+					$subjects[] = '<a href="'.$cat_link.'">'.$cat->name.'</a>';
+				} else {
+					$subjects[] = $cat->name;
+				}
 			}
 		}
 	}
