@@ -1,4 +1,8 @@
-<?php if (is_home()) { ?>
+<?php if (has_tag('festivalfever') || has_category('festivals')) { ?>
+	<script type="text/javascript">
+	  GA_googleFillSlot("728x90_sponsor");
+	</script>
+<?php } elseif (is_home()) { ?>
 	<script type="text/javascript">
 	  GA_googleFillSlot("728x90_home");
 	</script>

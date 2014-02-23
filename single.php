@@ -76,7 +76,12 @@
 					<div class="divider clear">&nbsp;</div>
 
 					<div id="comments_wrapper">
-						<?php comments_template(); ?>
+						<?php 
+						
+						if ($post->ID != '20612') { comments_template(); }
+						else { echo '<div style="margin: 20px 0px;">Comments removed because they\'re all stupid.</div>'; }
+						
+						?>
 					</div>
 
 				<?php } ?>

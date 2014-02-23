@@ -44,6 +44,8 @@
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_ros");
 	GA_googleAddSlot("ca-pub-2746694815475031", "728x90_ratedr");
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_ratedr");
+	GA_googleAddSlot("ca-pub-2746694815475031", "728x90_sponsor");
+	GA_googleAddSlot("ca-pub-2746694815475031", "300x250_sponsor");
 	GA_googleAddSlot("ca-pub-2746694815475031", "300x100"); 
 	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_home"); 
 	GA_googleAddSlot("ca-pub-2746694815475031", "1x1_ros");

@@ -7,6 +7,9 @@
 	<p class="links">
 		<a href="/subscribe/">Secret Stuff</a><br/>
 		<a href="/privacy/">Privacy Policy</a><br/>
+		<a href="http://www.townsquaremedia.com/advertise/" target="_blank">Advertise Here</a><br/>
 	</p>
+
+	<p style="font-size: 8px; font-weight: bold; text-transform: uppercase;">A Member of Townsquare Music</p>
 
 </div>
