@@ -155,6 +155,9 @@
 							$shown_tags = array();
 							foreach ($combined_tags as $tag) {
 								if (!in_array($tag->slug, $shown_tags)) {
+									if ($tag->taxonomy == 'post_tag' && term_exists($tag->name, 'artist')) {
+										$tag = get_term($tag->term_id, 'artist');
+									}
 									echo '<a href="'.get_term_link($tag).'" rel="tag" class="tag-'.$tag->taxonomy.'">'.$tag->name.'</a>';
 									$shown_tags[] = $tag->slug;
 								}
@@ -260,6 +263,9 @@
 								$shown_tags = array();
 								foreach ($combined_tags as $tag) {
 									if (!in_array($tag->slug, $shown_tags)) {
+										if ($tag->taxonomy == 'post_tag' && term_exists($tag->name, 'artist')) {
+											$tag = get_term($tag->term_id, 'artist');
+										}
 										echo '<a href="'.get_term_link($tag).'" rel="tag" class="tag-'.$tag->taxonomy.'">'.$tag->name.'</a>';
 										$shown_tags[] = $tag->slug;
 									}
