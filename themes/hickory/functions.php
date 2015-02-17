@@ -51,7 +51,9 @@ function hick_enqueue_scripts() {
 	wp_localize_script( 'hickory', 'hick', $localize );
 	
 	if (is_singular() && get_option('thread_comments'))	wp_enqueue_script('comment-reply');
-
+	
+	wp_enqueue_style('antiquiet_custom', get_template_directory_uri() . '/css/antiquiet.css');
+	
 }
 
 function hickory_custom_css() {

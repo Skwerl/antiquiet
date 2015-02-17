@@ -25,7 +25,7 @@
 
 				<?php $post = $posts[0]; // Hack. Set $post so that the_date() works. ?>
 				<?php /* If this is a category archive */ if (is_category()) { ?>
-				<h2 class="content-heading"><?php _e('Browsing Category', 'hickory'); ?> <span class="thin"><?php single_cat_title(); ?></span></h2>
+				<h2 class="content-heading"><?php _e('All', 'hickory'); ?>: <span class="thin"><?php single_cat_title(); ?></span></h2>
 				
 				<?php } ?>
 				
@@ -77,11 +77,18 @@
 						
 						<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?><div class="classic-content"><?php endif; ?>
 						<span class="category">
-							<?php 
-							$category = get_the_category(get_the_ID()); 
-							if($category[0]){
-								echo '<a href="'.get_category_link($category[0]->term_id ).'">'.$category[0]->cat_name.'</a>';
+							<?php
+
+							$categories = get_the_category(get_the_ID());
+							$output = '';
+							$separator = ', ';
+							if($categories) {
+								foreach ($categories as $category) {
+									$output .= '<a href="'.get_category_link($category->term_id).'">'.$category->cat_name.'</a>'.$separator;
+								}
+								echo trim($output, $separator);
 							}
+
 							?>
 						</span>
 						<span class="item-comments"><?php comments_popup_link( 0, 1, '%', '', ''); ?></span>

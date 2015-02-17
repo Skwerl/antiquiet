@@ -1,0 +1,139 @@
+#header.layout2 {
+	background-color: #000;
+	background-image: url("http://cdn.antiquiet.com/wp-content/uploads/2015/02/aqv6-header-bg.jpg");
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+#featured_area h2 a {
+	font-size: 24px;
+	line-height: 1.1em;
+}
+
+#featured_area h2 a, .widget_slider h2 a {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#sidebar .widget {
+	margin-bottom: 20px;
+}
+
+.widget h2.content-heading {
+	font-size: 14px;
+}
+
+.widget-ad {
+	margin-bottom: 0px;
+}
+
+.widget ul.side-newsfeed li .side-item .side-item-text h4 {
+	line-height: 1.3em;
+}
+
+.widget ul.side-newsfeed li .side-item .side-item-text h4 a {
+	text-transform: uppercase;	
+}
+
+.post-header h1 {
+	font-size: 36px;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 1.1em;
+}
+
+.item h3 a {
+	font-size: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 1.2em;
+	margin-bottom: 5px;
+}
+
+.item span.item-comments,
+.post-header span.item-comments {
+	display: none;
+}
+
+.content ul.newsfeed.classic li {
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+}
+
+.content ul.newsfeed.classic li .item p {
+	margin-bottom: 6px;
+	line-height: 1.4em;
+}
+
+.post-header {
+	margin-bottom: -8px;
+}
+
+.post-header span.cat a {
+	font-size: 16px;
+}
+
+.post-header span.post-meta {
+	font-size: 16px;
+	font-style: normal;
+}
+
+.post-header span.post-meta span.line {
+	margin: 0 4px;
+}
+
+.post-header-tags {
+	clear: both;
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.post-entry p {
+	font-size: 16px;	
+	line-height: 1.7em;
+	text-align: justify;
+}
+
+p.wp-caption-text {
+	color: #FFF;
+	background-color: #000;
+	font-size: 0.9em !important;
+	padding: 3px 7px;
+}
+
+.post-entry blockquote p {
+	font-family: "Roboto", sans-serif;
+	text-align: left;
+}
+
+.post-tags a {
+	display: inline-block;
+	padding: 5px 7px;
+	margin-right: 8px;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-bottom: 5px;
+	border: 1px solid #999;
+	color: #999;
+	transition: .2s;
+}
+
+.post-tags a:hover {
+	border: 1px solid #000;
+	color: #000;
+}
+
+.post-tags a.tag-artist {
+	border: 1px solid #333;
+	color: #333;
+}
+
+.post-tags a.tag-artist:hover {
+	border: 1px solid #B60000;
+	color: #B60000;
+}
+
+.post-related h4 a {
+	text-transform: uppercase;
+}

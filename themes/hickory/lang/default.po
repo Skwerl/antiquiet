@@ -145,7 +145,7 @@ msgid "Edit"
 msgstr ""
 
 #: ../index.php:21
-msgid "Latest Posts"
+msgid "All Articles"
 msgstr ""
 
 #: ../page.php:34 ../page_fullwidth.php:39 ../single.php:166

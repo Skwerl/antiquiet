@@ -135,16 +135,54 @@
 
 						?>
 						<span class="post-meta"><?php _e('By', 'hickory'); ?> <?php the_author_posts_link(); ?> <?php if(get_the_author_meta('twitter')) : ?><a href="http://twitter.com/<?php echo the_author_meta('twitter'); ?>" class="author-twitter" title="Follow <?php echo $authorname; ?> on Twitter">@<?php echo the_author_meta('twitter'); ?></a><?php endif; ?> <span class="line">&#183;</span> <?php _e('On', 'hickory'); ?> <?php the_time( get_option('date_format') ); ?></span>
-						
+
 					</div>
+
+					<?php
+
+					$artists = wp_get_post_terms($post->ID, 'artist', $args);
+					$tags = wp_get_post_terms($post->ID, 'post_tag', $args);
+					$combined_tags = array_merge($artists, $tags);
+
+					if (!empty($combined_tags)) {
 					
+					?><div class="post-header-tags">
+						<?php if(vp_metabox('hickory_post.show_tags') == 1) : ?>
+						<?php else : ?>
+						<div class="post-tags">
+							<?php
+
+							$artists = wp_get_post_terms($post->ID, 'artist', $args);
+							$tags = wp_get_post_terms($post->ID, 'post_tag', $args);
+							$combined_tags = array_merge($artists, $tags);
+							
+							$shown_tags = array();
+							foreach ($combined_tags as $tag) {
+								if (!in_array($tag->slug, $shown_tags)) {
+									echo '<a href="'.get_term_link($tag).'" rel="tag" class="tag-'.$tag->taxonomy.'">'.$tag->name.'</a>';
+									$shown_tags[] = $tag->slug;
+								}
+							}
+							
+							?>
+							<?php //the_tags("",""); ?>
+						</div>
+						<?php endif; ?>
+					</div>
+
 					<div class="post-entry">
-						
+
+					<?php } else { ?>					
+
+					<div class="post-entry" style="margin-top: 22px;">
+					
+					<?php } ?>					
+
 						<?php global $multipage, $numpages, $page; ?>
 						<?php if($multipage) : ?>
 						<div class="post-pagi">
 						<span class="number"><?php echo $page; ?> of <?php echo $numpages; ?></span>
-						<?php $args = array(
+						<?php $paged_args = array(
 							'before'           => '<p>',
 							'after'            => '</p>',
 							'link_before'      => '',
@@ -155,11 +193,18 @@
 							'pagelink'         => '%',
 							'echo'             => 1
 						); ?>
-						<?php wp_link_pages( $args ); ?>
+						<?php wp_link_pages($paged_args); ?>
 						</div>
 						<?php endif; ?>
 						
 						<?php the_content(); ?>
+
+						<?php if($multipage) : ?>
+						<div class="post-pagi">
+						<span class="number"><?php echo $page; ?> of <?php echo $numpages; ?></span>
+						<?php wp_link_pages($paged_args); ?>
+						</div>
+						<?php endif; ?>
 						
 						<?php if(vp_metabox('hickory_post.hickory_post_type') == 'review') : ?>
 						  <div itemscope itemtype="http://schema.org/Review" style="display:none;">
@@ -208,13 +253,33 @@
 							
 						</div>
 						<?php endif; ?>
+
+						<?php if (!empty($combined_tags)) { ?>
 						
-						<?php if(vp_metabox('hickory_post.show_tags') == 1) : ?>
-						<?php else : ?>
-						<div class="post-tags">
-							<?php the_tags("",""); ?>
-						</div>
-						<?php endif; ?>
+							<?php if(vp_metabox('hickory_post.show_tags') == 1) : ?>
+							<?php else : ?>
+							<div class="post-tags">
+								<?php
+	
+								$artists = wp_get_post_terms($post->ID, 'artist', $args);
+								$tags = wp_get_post_terms($post->ID, 'post_tag', $args);
+								$combined_tags = array_merge($artists, $tags);
+								
+								$shown_tags = array();
+								foreach ($combined_tags as $tag) {
+									if (!in_array($tag->slug, $shown_tags)) {
+										echo '<a href="'.get_term_link($tag).'" rel="tag" class="tag-'.$tag->taxonomy.'">'.$tag->name.'</a>';
+										$shown_tags[] = $tag->slug;
+									}
+								}
+								
+								?>
+								<?php //the_tags("",""); ?>
+	
+							</div>
+							<?php endif; ?>
+
+						<?php } ?>
 						
 					</div>
 					
