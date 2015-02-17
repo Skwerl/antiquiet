@@ -49,65 +49,69 @@ add_filter('get_post_metadata', function ($value, $post_id, $meta_key, $single) 
 
 	static $is_recursing = false;
 
-	if (!$is_recursing && $meta_key === '_thumbnail_id') {
-		$is_recursing = true;
-		$value = get_post_thumbnail_id($post_id);
-		$is_recursing = false;
-		
-		if (empty($value)) {
+	$post_status = get_post_status($post_id);
+	if ($post_status == 'publish') {
 
-			if (wp_attachment_is_image($post_id)) {
-
-				$value = $post_id;
-
-			} else {
-
-				global $wpdb;	
-				$parser = new htmlparser_class;
-	
-				$post = $wpdb->get_row("SELECT post_content FROM $wpdb->posts WHERE ID = '$post_id';");
-				$parser->InsertHTML($post->post_content);
-				$parser->Parse();
-				$result = $parser->GetElements($htmlCode);
-				$images = $parser->getTagResource('img');
-				/* Example:
-				(
-					[class] => alignnone size-large wp-image-57295
-					[src] => http://cdn.antiquiet.com/wp-content/uploads/2014/06/jroddy_bandshot2-626x334.jpg
-					[alt] => jroddy_bandshot2
-					[width] => 626
-					[height] => 334
-				)
-				*/
-				if ($images == false) {
-					$value = false;
-				} else {
-					$value = false;
-					$first_image = $images[0];
-					if (isset($first_image['class'])) {
-						preg_match('/\swp-image-(\d+)/', $first_image['class'], $matches);
-						if (!empty($matches)) {
-							$value = $matches[1];
-							aq_featured_image_update($post_id, $value);
-						}
-					} else {
-						//$value = aq_set_featured_image($post_id);
-					}
-				}
-	
-				if (empty($value)) {
-					// Default?
-					$value = 57387;
-				}
+		if (!$is_recursing && $meta_key === '_thumbnail_id') {
+			$is_recursing = true;
+			$value = get_post_thumbnail_id($post_id);
+			$is_recursing = false;
 			
+			if (empty($value)) {
+	
+				if (wp_attachment_is_image($post_id)) {
+	
+					$value = $post_id;
+	
+				} else {
+	
+					global $wpdb;	
+					$parser = new htmlparser_class;
+		
+					$post = $wpdb->get_row("SELECT post_content FROM $wpdb->posts WHERE ID = '$post_id';");
+					$parser->InsertHTML($post->post_content);
+					$parser->Parse();
+					$result = $parser->GetElements($htmlCode);
+					$images = $parser->getTagResource('img');
+					/* Example:
+					(
+						[class] => alignnone size-large wp-image-57295
+						[src] => http://cdn.antiquiet.com/wp-content/uploads/2014/06/jroddy_bandshot2-626x334.jpg
+						[alt] => jroddy_bandshot2
+						[width] => 626
+						[height] => 334
+					)
+					*/
+					if ($images == false) {
+						$value = false;
+					} else {
+						$value = false;
+						$first_image = $images[0];
+						if (isset($first_image['class'])) {
+							preg_match('/\swp-image-(\d+)/', $first_image['class'], $matches);
+							if (!empty($matches)) {
+								$value = $matches[1];
+								aq_featured_image_update($post_id, $value);
+							}
+						} else {
+							//$value = aq_set_featured_image($post_id);
+						}
+					}
+		
+					if (empty($value)) {
+						// Default?
+						$value = 57387;
+					}
+				
+				}
+	
 			}
-
+	
+			if (!$single) {
+				$value = array($value);
+			}
+	
 		}
-
-		if (!$single) {
-			$value = array($value);
-		}
-
 
 	}
 
