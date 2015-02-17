@@ -39,72 +39,83 @@
 					
 					<div class="item">
 							
-						<div class="item-image">
-						
-						<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?>
-							
-							<?php if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) : ?>
-								<a href="<?php echo get_permalink() ?>" rel="bookmark"><?php the_post_thumbnail('list_thumb'); ?></a>
-							<?php else : ?>
-								<a href="<?php echo get_permalink() ?>" rel="bookmark"><img src="<?php echo get_template_directory_uri(); ?>/img/list-default.png" alt="" /></a>
-							<?php endif; ?>
-							
-						<?php else : ?>
-						
-							<?php if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) : ?>
-								<a href="<?php echo get_permalink() ?>" rel="bookmark"><?php the_post_thumbnail('newsfeed'); ?></a>
-							<?php else : ?>
-								
-							<?php endif; ?>
-							
-						<?php endif; ?>
-							
-						<?php 
-							if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) {
-								if(vp_metabox('hickory_post.hickory_post_type') == 'video') {
-									echo '<a href="' . get_permalink() . '"><div class="item-image-icon video"></div></a>';
-								} elseif(vp_metabox('hickory_post.hickory_post_type') == 'gallery') {
-									echo '<a href="' . get_permalink() . '"><div class="item-image-icon gallery"></div></a>';
-								} elseif(vp_metabox('hickory_post.hickory_post_type') == 'review') {
-									echo '<div class="review-box"><span class="score">' . vp_metabox('hickory_post.review.0.overall_score') . '</span><span class="text">Score</span></div>';
-								} elseif(vp_metabox('hickory_post.hickory_post_type') == 'music') {
-									echo '<a href="' . get_permalink() . '"><div class="item-image-icon music"></div></a>';
-								}
-							}
-						?>
-							
+						<?php $sessions_banner_url = get_post_meta(get_the_ID(), 'sessions_banner_url', true);
+						if (is_category('sessions') && !empty($sessions_banner_url)) { ?>
+
+						<div class="special-list-item sessions">
+							<a href="<?php echo get_permalink() ?>" rel="bookmark" title="<?php echo get_the_title(); ?>"><img src="<?php echo $sessions_banner_url; ?>" /></a>
 						</div>
-						
-						<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?><div class="classic-content"><?php endif; ?>
-						<span class="category">
-							<?php
 
-							$categories = get_the_category(get_the_ID());
-							$output = '';
-							$separator = ', ';
-							if($categories) {
-								foreach ($categories as $category) {
-									$output .= '<a href="'.get_category_link($category->term_id).'">'.$category->cat_name.'</a>'.$separator;
-								}
-								echo trim($output, $separator);
-							}
+						<?php } else { ?>
 
-							?>
-						</span>
-						<span class="item-comments"><?php comments_popup_link( 0, 1, '%', '', ''); ?></span>
-						<h3><a href="<?php echo get_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h3>
-						<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?>
-
-							<p><?php echo hick_string_limit_words(get_the_excerpt(), 19); ?> ...</p>
-
-						<?php else : ?>
+							<div class="item-image">
 							
-							<p><?php echo hick_string_limit_words(get_the_excerpt(), 28); ?> ...</p>
+							<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?>
 								
-						<?php endif; ?>
-						<span class="item_meta"><?php _e('On', 'hickory'); ?> <?php the_time( get_option('date_format') ); ?> <span class="line">/</span> <?php _e('By', 'hickory'); ?> <?php the_author_posts_link(); ?></span>
-						<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?></div><?php endif; ?>
-						
+								<?php if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) : ?>
+									<a href="<?php echo get_permalink() ?>" rel="bookmark"><?php the_post_thumbnail('list_thumb'); ?></a>
+								<?php else : ?>
+									<a href="<?php echo get_permalink() ?>" rel="bookmark"><img src="<?php echo get_template_directory_uri(); ?>/img/list-default.png" alt="" /></a>
+								<?php endif; ?>
+								
+							<?php else : ?>
+							
+								<?php if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) : ?>
+									<a href="<?php echo get_permalink() ?>" rel="bookmark"><?php the_post_thumbnail('newsfeed'); ?></a>
+								<?php else : ?>
+									
+								<?php endif; ?>
+								
+							<?php endif; ?>
+								
+							<?php 
+								if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) {
+									if(vp_metabox('hickory_post.hickory_post_type') == 'video') {
+										echo '<a href="' . get_permalink() . '"><div class="item-image-icon video"></div></a>';
+									} elseif(vp_metabox('hickory_post.hickory_post_type') == 'gallery') {
+										echo '<a href="' . get_permalink() . '"><div class="item-image-icon gallery"></div></a>';
+									} elseif(vp_metabox('hickory_post.hickory_post_type') == 'review') {
+										echo '<div class="review-box"><span class="score">' . vp_metabox('hickory_post.review.0.overall_score') . '</span><span class="text">Score</span></div>';
+									} elseif(vp_metabox('hickory_post.hickory_post_type') == 'music') {
+										echo '<a href="' . get_permalink() . '"><div class="item-image-icon music"></div></a>';
+									}
+								}
+							?>
+								
+							</div>
+
+							<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?><div class="classic-content"><?php endif; ?>
+							<span class="category">
+								<?php
+	
+								$categories = get_the_category(get_the_ID());
+								$output = '';
+								$separator = ', ';
+								if($categories) {
+									foreach ($categories as $category) {
+										$output .= '<a href="'.get_category_link($category->term_id).'">'.$category->cat_name.'</a>'.$separator;
+									}
+									echo trim($output, $separator);
+								}
+	
+								?>
+							</span>
+							<span class="item-comments"><?php comments_popup_link( 0, 1, '%', '', ''); ?></span>
+							<h3><a href="<?php echo get_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h3>
+							<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?>
+	
+								<p><?php echo hick_string_limit_words(get_the_excerpt(), 19); ?> ...</p>
+	
+							<?php else : ?>
+								
+								<p><?php echo hick_string_limit_words(get_the_excerpt(), 28); ?> ...</p>
+									
+							<?php endif; ?>
+							<span class="item_meta"><?php _e('On', 'hickory'); ?> <?php the_time( get_option('date_format') ); ?> <span class="line">/</span> <?php _e('By', 'hickory'); ?> <?php the_author_posts_link(); ?></span>
+							<?php if(hick_option('hickory_archive_layout') == 'hickory_archive_list') : ?></div><?php endif; ?>
+
+						<?php } ?>
+
 					</div>
 					
 					</li>

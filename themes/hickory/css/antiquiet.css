@@ -130,6 +130,10 @@ p.wp-caption-text {
 	width: 95%;
 }
 
+.post-entry div.wordtube {
+	margin-bottom: 15px;
+}
+
 .post-tags a {
 	display: inline-block;
 	padding: 5px 7px;
@@ -160,4 +164,46 @@ p.wp-caption-text {
 
 .post-related h4 a {
 	text-transform: uppercase;
+}
+
+/* Responsive Overrides */
+
+	/* Desktop */
+@media only screen and (min-width: 960px) {
+
+	.special-list-item img {
+		width: 620px;
+		height: auto;
+	}
+
+}
+
+	/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+
+	.special-list-item img {
+		width: 496px;
+		height: auto;
+	}
+
+}
+
+	/* Landscape */
+@media only screen and (max-width: 767px) {
+
+	.special-list-item img {
+		width: 300px;
+		height: auto;
+	}
+
+}
+
+	/* Portrait */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	.special-list-item img {
+		width: 440px;
+		height: auto;
+	}
+
 }
