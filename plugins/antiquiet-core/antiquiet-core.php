@@ -136,6 +136,11 @@ function add_tagged_to_artist_page($query) {
 }
 add_filter('pre_get_posts', 'add_tagged_to_artist_page');
 
+function enable_tags_on_attachments() {
+	register_taxonomy_for_object_type('post_tag', 'attachment');
+}
+add_action('init', 'enable_tags_on_attachments');
+
 require_once('cleaners.php');
 
 ?>
