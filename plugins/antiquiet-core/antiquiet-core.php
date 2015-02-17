@@ -117,6 +117,25 @@ add_filter('get_post_metadata', function ($value, $post_id, $meta_key, $single) 
 
 //add_action('publish_post', 'aq_set_featured_image');
 
+function add_tagged_to_artist_page($query) {
+    if ($query->is_tax('artist') && $query->is_main_query()) {
+		$artist_term = get_query_var('term');
+        $query->set('tax_query',
+            array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'post_tag',
+                    'field' => 'slug',
+                    'terms' => $artist_term,
+                    'operator' => 'IN'
+                )
+            )
+        );
+    }
+    return $query;
+}
+add_filter('pre_get_posts', 'add_tagged_to_artist_page');
+
 require_once('cleaners.php');
 
 ?>
