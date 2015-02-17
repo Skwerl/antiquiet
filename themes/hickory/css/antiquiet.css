@@ -166,6 +166,12 @@ p.wp-caption-text {
 	text-transform: uppercase;
 }
 
+body.category-sessions .content ul.newsfeed.classic li {
+	border-bottom: none;
+	margin-bottom: 17px;
+	padding-bottom: 0px;
+}
+
 /* Responsive Overrides */
 
 	/* Desktop */
