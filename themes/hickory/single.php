@@ -151,10 +151,6 @@
 						<?php else : ?>
 						<div class="post-tags">
 							<?php
-
-							$artists = wp_get_post_terms($post->ID, 'artist', $args);
-							$tags = wp_get_post_terms($post->ID, 'post_tag', $args);
-							$combined_tags = array_merge($artists, $tags);
 							
 							$shown_tags = array();
 							foreach ($combined_tags as $tag) {
@@ -260,11 +256,7 @@
 							<?php else : ?>
 							<div class="post-tags">
 								<?php
-	
-								$artists = wp_get_post_terms($post->ID, 'artist', $args);
-								$tags = wp_get_post_terms($post->ID, 'post_tag', $args);
-								$combined_tags = array_merge($artists, $tags);
-								
+									
 								$shown_tags = array();
 								foreach ($combined_tags as $tag) {
 									if (!in_array($tag->slug, $shown_tags)) {
