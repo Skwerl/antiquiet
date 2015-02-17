@@ -102,8 +102,12 @@ p.wp-caption-text {
 }
 
 .post-entry blockquote p {
+	color: #555 !important;
+	font-size: 1.1em;
+	line-height: 1.7em;	
 	font-family: "Roboto", sans-serif;
-	text-align: left;
+	float: none;
+	width: 95%;
 }
 
 .post-tags a {

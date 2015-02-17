@@ -18,6 +18,7 @@ function hick_register_scripts() {
 	wp_register_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', 'jquery', '', true);
 	wp_register_script('colorbox', get_template_directory_uri() . '/js/jquery.colorbox-min.js', 'jquery', '', true);
 	wp_register_script('meanmenu', get_template_directory_uri() . '/js/jquery.meanmenu.min.js', 'jquery', '', true);
+	wp_register_script('antiquiet_custom', get_template_directory_uri() . '/js/antiquiet.js', 'jquery', '', true);
 
 }
 
@@ -43,6 +44,7 @@ function hick_enqueue_scripts() {
 	wp_enqueue_script('pinit');
 	wp_enqueue_script('flexslider');
 	wp_enqueue_script('colorbox');
+	wp_enqueue_script('antiquiet_custom');
 
 	$localize = array(
 		'is_home' => is_home(),
