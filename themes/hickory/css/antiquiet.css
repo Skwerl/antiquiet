@@ -5,6 +5,14 @@
 	background-repeat: no-repeat;
 }
 
+#top_search a i {
+	color: #FFF;
+}
+
+#top_search a:hover i {
+	color: #fef0cb;
+}
+
 #featured_area h2 a {
 	font-size: 24px;
 	line-height: 1.1em;
@@ -99,6 +107,18 @@ p.wp-caption-text {
 	background-color: #000;
 	font-size: 0.9em !important;
 	padding: 3px 7px;
+}
+
+.post-entry div.alignright {
+	float: right;
+	margin-top: 0.3em;
+	margin-left: 1.4em;
+}
+
+.post-entry div.alignleft {
+	float: left;
+	margin-top: 0.3em;
+	margin-right: 1.4em;
 }
 
 .post-entry blockquote p {

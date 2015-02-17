@@ -12,10 +12,22 @@ jQuery(document).ready(function($) {
 		}
 	}
 
+	function resize_insets() {
+		if ($("body").hasClass("single")) {	
+			$("div.wp-caption img").each(function(index) {
+				var target_width = $(this).width();
+				console.log(target_width);
+				$(this).closest(".wp-caption").width(target_width);
+			});	
+		}
+	}
+
 	$(window).resize(function() {
 		resize_embeds();
+		resize_insets();
 	});
 	
 	resize_embeds();
+	resize_insets();
 
 });
