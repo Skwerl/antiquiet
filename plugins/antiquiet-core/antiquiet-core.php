@@ -117,10 +117,6 @@ add_filter('get_post_metadata', function ($value, $post_id, $meta_key, $single) 
 
 //add_action('publish_post', 'aq_set_featured_image');
 
-add_filter('get_the_excerpt', function($text) {
-	$text = strip_shortcodes($text);
-	$text = strip_tags($text);
-	return $text;
-});
+require_once('cleaners.php');
 
 ?>
