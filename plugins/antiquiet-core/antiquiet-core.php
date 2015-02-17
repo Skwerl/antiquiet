@@ -99,8 +99,12 @@ add_filter('get_post_metadata', function ($value, $post_id, $meta_key, $single) 
 					}
 		
 					if (empty($value)) {
-						// Default?
-						$value = 57387;
+						$age = get_post_time('Y', false, $post_id);
+						if ($age > 2011) {
+							$value = '57398';
+						} else {
+							$value = '57399';
+						}
 					}
 				
 				}
@@ -164,6 +168,19 @@ function enable_tags_on_attachments() {
 	register_taxonomy_for_object_type('post_tag', 'attachment');
 }
 add_action('init', 'enable_tags_on_attachments');
+
+function extend_nsfw_tag_to_attachments($post_id) {
+	if (wp_is_post_revision($post_id)) {
+		return;
+	}
+	if (has_tag('nsfw', $post_id)) {
+		$attachments =& get_children("post_parent=$post_id&post_type=attachment");
+		foreach ((array)$attachments as $attachment_id => $attachment) {
+			wp_set_post_tags($attachment_id, 'nsfw', true);
+		}
+	}
+}
+add_action('save_post', 'extend_nsfw_tag_to_attachments');
 
 require_once('cleaners.php');
 
