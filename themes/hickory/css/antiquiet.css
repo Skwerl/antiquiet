@@ -106,7 +106,8 @@ p.wp-caption-text {
 	color: #FFF;
 	background-color: #000;
 	font-size: 0.9em !important;
-	padding: 3px 7px;
+	line-height: 1.3em;
+	padding: 4px 7px;
 }
 
 .post-entry div.alignright {
