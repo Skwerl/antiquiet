@@ -121,6 +121,26 @@ add_filter('get_post_metadata', function ($value, $post_id, $meta_key, $single) 
 
 //add_action('publish_post', 'aq_set_featured_image');
 
+function use_lazy_title($title, $post_id = null) {
+	if (!is_admin()) {
+		$lazy_title_on = get_post_meta($post_id, 'lazy_title_on', true);
+		if (!empty($lazy_title_on)) {
+			$lazy_artist = get_post_meta($post_id, 'lazy_title_artist', true);
+			$lazy_song = '\''.get_post_meta($post_id, 'lazy_title_song', true).'\'';
+			$separator = ''; if (!empty($lazy_artist) && !empty($lazy_song)) { $separator = ', '; }
+			$title = $lazy_artist.$separator.$lazy_song;
+		}
+	}
+    return $title;
+}
+add_filter('the_title', 'use_lazy_title', 10, 2);
+
+function aq_admin_load_scripts($hook) {
+	if ($hook != 'post.php') { return; }
+	wp_enqueue_script('aq-edit-js', plugins_url('antiquiet-core/js/post.js', dirname(__FILE__)));
+}
+add_action('admin_enqueue_scripts', 'aq_admin_load_scripts');
+
 function add_tagged_to_artist_page($query) {
     if ($query->is_tax('artist') && $query->is_main_query()) {
 		$artist_term = get_query_var('term');
