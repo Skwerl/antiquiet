@@ -3,7 +3,7 @@
 /*
 Plugin Name: Antiquiet Core
 Description: Does some magical things...
-Version:     1.0
+Version:     1.1
 Author:      Skwerl
 Text Domain: ntqt_core
 
@@ -101,9 +101,9 @@ add_filter('get_post_metadata', function ($value, $post_id, $meta_key, $single) 
 					if (empty($value)) {
 						$age = get_post_time('Y', false, $post_id);
 						if ($age > 2011) {
-							$value = '57398';
+							$value = '59996';
 						} else {
-							$value = '57399';
+							$value = '59997';
 						}
 					}
 				
@@ -145,6 +145,17 @@ function aq_admin_load_scripts($hook) {
 }
 add_action('admin_enqueue_scripts', 'aq_admin_load_scripts');
 
+$tv_schedules_cat_id = get_cat_ID('TV Schedules');
+if (!empty($tv_schedules_cat_id)) {
+	add_filter('pre_get_posts', function($query) {
+		if ($query->is_front) {
+			$tv_schedules_cat_id = get_cat_ID('TV Schedules');
+			$query->set('cat', '-'.$tv_schedules_cat_id);
+		}
+		return $query;
+	});
+}
+
 function add_tagged_to_artist_page($query) {
     if ($query->is_tax('artist') && $query->is_main_query()) {
 		$artist_term = get_query_var('term');
@@ -181,6 +192,35 @@ function extend_nsfw_tag_to_attachments($post_id) {
 	}
 }
 add_action('save_post', 'extend_nsfw_tag_to_attachments');
+
+add_shortcode('divider', 'render_divider');
+function render_divider($attr, $content = null) {
+	return '<div class="divider">&nbsp;</div>';
+}
+
+function add_fluence_field($user) { ?>
+	<h3>Fluence.io Integration</h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="twitter">Fluence Username</label></th>
+			<td>
+				<input type="text" name="fluence" id="fluence" value="<?php echo esc_attr(get_the_author_meta('fluence', $user->ID)); ?>" class="regular-text" /><br />
+				<span class="description">Please enter your Fluence username.</span>
+			</td>
+		</tr>
+	</table>
+<?php }
+add_action('show_user_profile', 'add_fluence_field');
+add_action('edit_user_profile', 'add_fluence_field');
+
+function save_fluence_field($user_id) {
+	if (!current_user_can('edit_user', $user_id))
+		return false;
+
+	update_usermeta($user_id, 'fluence', $_POST['fluence']);
+}
+add_action('personal_options_update', 'save_fluence_field');
+add_action('edit_user_profile_update', 'save_fluence_field');
 
 require_once('cleaners.php');
 
